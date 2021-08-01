@@ -1,0 +1,19 @@
+{
+  "name": "rebel-simulator",
+  "version": "1.0.0",
+  "description": "Simulation program made for UNET system sim course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesusaugusto0x2/rebel-simulator.git"
+  },
+  "author": "Jesus Varela & David Hidalgo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesusaugusto0x2/rebel-simulator/issues"
+  },
+  "homepage": "https://github.com/jesusaugusto0x2/rebel-simulator#readme"
+}
