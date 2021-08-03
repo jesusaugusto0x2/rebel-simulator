@@ -18,7 +18,7 @@ export class Scheduler {
 
     this.timeAccumulator += _time;
 
-    this.event.time = this.timeAccumulator;
+    event.time = this.timeAccumulator;
 
     this.events.push(event);
   }

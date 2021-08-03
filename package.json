@@ -16,5 +16,7 @@
     "url": "https://github.com/jesusaugusto0x2/rebel-simulator/issues"
   },
   "homepage": "https://github.com/jesusaugusto0x2/rebel-simulator#readme",
-  "type": "module"
+  "dependencies": {
+    "probability-distributions": "^0.9.1"
+  }
 }

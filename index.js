@@ -1,35 +1,39 @@
-// import { Governor } from "./classes/Governor.js";
+const PD = require("probability-distributions");
 
-// function init() {
-//   let gob = new Governor("Jesus Varela");
+// import { Scheduler } from "./handlers/Scheduler.js";
 
-//   console.log(gob.salute());
+// function sleep(ms) {
+//   return new Promise(resolve => {
+//     setTimeout(resolve, ms);
+//   });
 // }
 
-// init();
+const simulate = async () => {
+  // const scheduler = new Scheduler();
 
-import { Scheduler } from "./handlers/Scheduler.js";
+  // scheduler.setEvent(
+  //   { title: "First event summoned!", slug: "example_event" },
+  //   3
+  // );
 
-const scheduler = new Scheduler();
+  // scheduler.setEvent(
+  //   { title: "Second event summoned!", slug: "example_event" },
+  //   5
+  // );
 
-scheduler.setEvent(
-  { title: "First event summoned!", slug: "example_event" },
-  3
-);
+  // scheduler.start();
 
-scheduler.setEvent(
-  { title: "Second event summoned!", slug: "example_event" },
-  5
-);
+  // while (scheduler.hasEvents()) {
+  //   let event = scheduler.getEvent();
 
-const simulate = () => {
-  scheduler.start();
+  //   console.log("event", event);
 
-  while (scheduler.hasEvents()) {
-    let event = scheduler.getEvent();
+  //   scheduler.stepAhead();
 
-    console.log("event", event);
-  }
+  //   await sleep(500);
+  // }
+
+  console.log("Random Integer", PD.rint(1, 500, 1000, false)[0]);
 };
 
 simulate();
