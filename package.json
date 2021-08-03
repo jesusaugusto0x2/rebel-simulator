@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/jesusaugusto0x2/rebel-simulator/issues"
   },
-  "homepage": "https://github.com/jesusaugusto0x2/rebel-simulator#readme"
+  "homepage": "https://github.com/jesusaugusto0x2/rebel-simulator#readme",
+  "type": "module"
 }
