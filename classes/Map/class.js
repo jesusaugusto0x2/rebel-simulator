@@ -1,7 +1,9 @@
 const PD = require("probability-distributions");
 
+const Helper = require("./helpers.js");
+
 class Map {
-  constructor(name) {
+  constructor(name, scheduler) {
     this.name = name;
     this.budget = PD.rint(1, 40, 55, false)[0];
     this.yearBudget = 0;
@@ -14,6 +16,17 @@ class Map {
     this.inflation = 0;
     this.insurgentDiplomacy = PD.runif(100)[0];
     this.stability = 0;
+    this.scheduler = scheduler;
+  }
+
+  evaluate() {
+    console.log(
+      `Evaluating map circumstances ${this.scheduler.getCurrentTime()}`
+    );
+
+    Helper.incrementBudget(this);
+
+    console.log("budget", this.budget);
   }
 }
 
