@@ -1,4 +1,4 @@
-export class Governor {
+class Governor {
   constructor(name, type) {
     this.name = name;
     this.type = type;
@@ -8,3 +8,5 @@ export class Governor {
     return `Hello, my name is ${this.name}`;
   }
 }
+
+exports.Governor = Governor;

@@ -1,39 +1,24 @@
-const PD = require("probability-distributions");
-
-// import { Scheduler } from "./handlers/Scheduler.js";
-
-// function sleep(ms) {
-//   return new Promise(resolve => {
-//     setTimeout(resolve, ms);
-//   });
-// }
+// const PD = require("probability-distributions");
+const { Scheduler } = require("./handlers/Scheduler.js");
+const { Map } = require("./classes/Map.js");
+const { sleep } = require("./utils/time.js");
 
 const simulate = async () => {
-  // const scheduler = new Scheduler();
+  const scheduler = new Scheduler();
 
-  // scheduler.setEvent(
-  //   { title: "First event summoned!", slug: "example_event" },
-  //   3
-  // );
+  const map = new Map();
 
-  // scheduler.setEvent(
-  //   { title: "Second event summoned!", slug: "example_event" },
-  //   5
-  // );
+  console.log("Scheduler", scheduler);
 
-  // scheduler.start();
+  console.log("Map", map);
 
-  // while (scheduler.hasEvents()) {
-  //   let event = scheduler.getEvent();
+  while (map.stability < 100 || map.reputation < 0) {
+    console.log(`Start of week ${scheduler.getCurrentTime()}`);
 
-  //   console.log("event", event);
+    scheduler.stepAhead();
 
-  //   scheduler.stepAhead();
-
-  //   await sleep(500);
-  // }
-
-  console.log("Random Integer", PD.rint(1, 500, 1000, false)[0]);
+    await sleep(1000);
+  }
 };
 
 simulate();

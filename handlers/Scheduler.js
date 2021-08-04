@@ -1,9 +1,8 @@
-export class Scheduler {
+class Scheduler {
   constructor() {
     this.events = [];
     this.currentTime = 0;
     this.timeAccumulator = 1;
-    this.hasStarted = false;
   }
 
   /**
@@ -62,11 +61,13 @@ export class Scheduler {
   }
 
   /**
-   * Starts the scheduler stepper
+   * Returns the current time of the scheduler
    *
-   * @returns {Void}
+   * @returns {Integer}
    */
-  start() {
-    this.hasStarted = true;
+  getCurrentTime() {
+    return this.currentTime;
   }
 }
+
+exports.Scheduler = Scheduler;
