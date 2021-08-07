@@ -1,4 +1,3 @@
-// const PD = require("probability-distributions");
 const { Scheduler } = require("./handlers/Scheduler.js");
 const { Map } = require("./classes/Map/class.js");
 const { sleep } = require("./utils/time.js");
@@ -12,13 +11,7 @@ const simulate = async () => {
 
   const map = new Map(makeId(20), scheduler, governor);
 
-  console.log("Scheduler", scheduler);
-
-  console.log("Map", map);
-
-  while (map.stability < 100 || map.reputation < 0) {
-    console.log(`Starting a new week`);
-
+  while (map.stability.value < 100 || map.reputation.value > 0) {
     map.evaluate();
 
     scheduler.stepAhead();
