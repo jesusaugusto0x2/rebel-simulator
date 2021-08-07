@@ -3,7 +3,7 @@ const PD = require("probability-distributions");
 const Helper = require("./helpers.js");
 
 class Map {
-  constructor(name, scheduler) {
+  constructor(name, scheduler, governor) {
     this.name = name;
     this.budget = PD.rint(1, 40, 55, false)[0];
     this.yearBudget = 0;
@@ -17,6 +17,7 @@ class Map {
     this.insurgentDiplomacy = PD.runif(100)[0];
     this.stability = 0;
     this.scheduler = scheduler;
+    this.governor = governor;
   }
 
   evaluate() {

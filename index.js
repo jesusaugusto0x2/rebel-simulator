@@ -3,11 +3,14 @@ const { Scheduler } = require("./handlers/Scheduler.js");
 const { Map } = require("./classes/Map/class.js");
 const { sleep } = require("./utils/time.js");
 const { makeId } = require("./utils/strings.js");
+const { Governor } = require("./classes/Governor/class.js");
 
 const simulate = async () => {
   const scheduler = new Scheduler();
 
-  const map = new Map(makeId(20), scheduler);
+  const governor = new Governor();
+
+  const map = new Map(makeId(20), scheduler, governor);
 
   console.log("Scheduler", scheduler);
 
