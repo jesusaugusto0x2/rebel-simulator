@@ -4,7 +4,7 @@
  *
  * @returns {Number}
  */
-export const getRandom = () => {
+exports.getRandom = () => {
   return Math.random();
 };
 
@@ -16,7 +16,7 @@ export const getRandom = () => {
  * @param {Number} max
  * @returns {Number}
  */
-export const getUniformRandom = (min, max) => {
+exports.getUniformRandom = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
@@ -28,6 +28,6 @@ export const getUniformRandom = (min, max) => {
  * @param {Number} max
  * @returns {Number}
  */
-export const getNonUniformRandom = (min, max) => {
+exports.getNonUniformRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };

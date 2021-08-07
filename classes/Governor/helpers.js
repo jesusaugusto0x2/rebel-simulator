@@ -1,1 +1,1 @@
-const createType = () => {};
+exports.createType = () => {};

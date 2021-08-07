@@ -38,6 +38,8 @@ class Map {
 
     Helper.incrementBudget(this);
 
+    this.governor.executeOperation(this);
+
     console.log("budget", this.budget);
   }
 }
