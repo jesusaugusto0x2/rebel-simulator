@@ -15,9 +15,9 @@ class Scheduler {
   setEvent(_evt, _time) {
     let event = _evt;
 
-    this.timeAccumulator += _time;
+    event.time = this.currentTime + _time;
 
-    event.time = this.timeAccumulator;
+    console.log("Inserting a new event on: ", event);
 
     this.events.push(event);
   }
@@ -37,18 +37,14 @@ class Scheduler {
    *
    * @returns {Void}
    */
-  getEvent() {
+  getCurrentEvents() {
     if (!this.hasEvents()) {
       return null;
     }
 
-    let event = this.events[0];
-
-    if (this.currentTime === event.time) {
-      return this.events.shift();
-    }
-
-    return null;
+    return this.events.filter(evt => {
+      return evt.time === this.currentTime;
+    });
   }
 
   /**
