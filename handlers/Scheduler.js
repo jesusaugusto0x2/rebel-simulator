@@ -38,10 +38,6 @@ class Scheduler {
    * @returns {Void}
    */
   getCurrentEvents() {
-    if (!this.hasEvents()) {
-      return null;
-    }
-
     return this.events.filter(evt => {
       return evt.time === this.currentTime;
     });

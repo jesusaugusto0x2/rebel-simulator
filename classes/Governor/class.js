@@ -8,6 +8,8 @@ class Governor {
     this.name = name;
     this.type = type;
     this.scheduler = scheduler;
+
+    // Operation classes utilities
     this.civOp = new CivilianOperation();
     this.govOp = new GovernmentOperation();
     this.milOp = new MilitaryOperation();
@@ -22,7 +24,7 @@ class Governor {
 
     if (Helper.evaluateCivilianOp(map)) {
       console.log(`A civilan operation can be executed`);
-      this.civOp.execute(map);
+      this.civOp.execute(map, this.scheduler);
     }
   }
 }

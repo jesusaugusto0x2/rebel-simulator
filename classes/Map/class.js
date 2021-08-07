@@ -31,10 +31,16 @@ class Map {
     this.governor = governor;
   }
 
+  reduceBudget(value) {
+    this.budget -= value;
+  }
+
   evaluate() {
     console.log(
       `Evaluating map circumstances ${this.scheduler.getCurrentTime()}`
     );
+
+    Helper.runEvents(this);
 
     Helper.incrementBudget(this);
 

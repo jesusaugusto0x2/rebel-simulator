@@ -1,10 +1,26 @@
 class Operation {
-  constructor(type, time) {
+  constructor(type, baseTime, basePrice) {
     this.type = type;
-    this.time = time;
+    this.baseTime = baseTime;
+    this.basePrice = basePrice;
   }
 
-  execute() {}
+  execute(map, scheduler, operationType, probabilitySet) {
+    if (map.budget < this.basePrice) {
+      console.log(`Couldn't perform operation due to low budget`);
+      return null;
+    }
+
+    map.reduceBudget(this.basePrice);
+
+    scheduler.setEvent(
+      {
+        operation: operationType,
+        probabilities: probabilitySet,
+      },
+      this.baseTime
+    );
+  }
 }
 
 exports.Operation = Operation;
