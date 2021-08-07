@@ -1,6 +1,7 @@
 const { CivilianOperation } = require("../Operation/Civilian/class.js");
 const { GovernmentOperation } = require("../Operation/Government/class.js");
 const { MilitaryOperation } = require("../Operation/Military/class.js");
+const Helper = require("./helpers.js");
 
 class Governor {
   constructor(name, type, scheduler) {
@@ -18,6 +19,11 @@ class Governor {
 
   executeOperation(map) {
     console.log(`Governor is executing an operation...`);
+
+    if (Helper.evaluateCivilianOp(map)) {
+      console.log(`A civilan operation can be executed`);
+      this.civOp.execute(map);
+    }
   }
 }
 

@@ -31,3 +31,24 @@ exports.getUniformRandom = (min, max) => {
 exports.getNonUniformRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
+
+/**
+ * Sums 2 different probabilities by exclusion
+ *
+ * @param {Number} prA
+ * @param {Number} prB
+ * @returns {Number}
+ */
+exports.joinExcludentProbs = (prA, prB) => {
+  return prA + prB - prA * prB;
+};
+
+/**
+ * Returns the inverse probability of a given one
+ *
+ * @param {Number} pr
+ * @returns {Number}
+ */
+exports.getInverseProb = pr => {
+  return 1 - pr;
+};

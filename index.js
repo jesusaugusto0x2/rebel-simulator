@@ -9,6 +9,8 @@ const simulate = async () => {
   const governor = new Governor(`Hugo Chavez`, `military`, scheduler);
   const map = new Map(makeId(20), scheduler, governor);
 
+  console.log(map);
+
   while (map.stability.value < 100 || map.reputation.value > 0) {
     map.evaluate();
     scheduler.stepAhead();

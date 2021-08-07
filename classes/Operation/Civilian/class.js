@@ -1,5 +1,7 @@
 const { Operation } = require("../class.js");
 
+const Prob = require("../../../utils/probabilities.js");
+
 class CivilianOp extends Operation {
   constructor() {
     super("civilian", 25);
@@ -10,7 +12,25 @@ class CivilianOp extends Operation {
     this.infrastructureOperationProb = 0.33;
   }
 
-  execute() {}
+  execute(map) {
+    const servProb = Prob.getRandom();
+
+    if (servProb < this.servicesOperationProb) {
+      this.serviceOperation();
+    }
+
+    const devProb = Prob.getRandom();
+
+    if (devProb < this.developmentOperation) {
+      this.developmentOperation();
+    }
+
+    const infProb = Prob.getRandom();
+
+    if (infProb < this.infrastructureOperation) {
+      this.infrastructureOperation();
+    }
+  }
 
   serviceOperation() {
     console.log(`Executing a service operation`);

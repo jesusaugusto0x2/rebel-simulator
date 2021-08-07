@@ -11,7 +11,7 @@ class Map {
     this.hostilePopulation = PD.rint(1, 17000, 20000, false)[0];
     this.supportPopulation = PD.rint(1, 400, 500, false)[0];
     this.insurgentDiplomacy = PD.runif(100)[0];
-    this.inflation = {
+    this.corruption = {
       prob: 0.05,
       value: 5,
     };
