@@ -7,3 +7,51 @@ exports.calculateType = () => {
 
   return operationTypes[index];
 };
+
+/**
+ * Builds an array with probability information to be processed by the map
+ *
+ * @param {Object} param0
+ * @param {Number} param0.corruptionVal
+ * @param {Number} param0.stabilityVal
+ * @param {Number} param0.inflationVal
+ * @param {Number} param0.reputationVal
+ * @param {Number} param0.insurgencyVal
+
+ * @returns {Array}
+ */
+exports.buildProbabilitySet = ({
+  corruptionVal,
+  stabilityVal,
+  inflationVal,
+  reputationVal,
+  insurgencyVal,
+}) => {
+  return [
+    {
+      type: "corruption",
+      value: corruptionVal,
+      operation: "increase",
+    },
+    {
+      type: "stability",
+      value: stabilityVal,
+      operation: "increase",
+    },
+    {
+      type: "inflation",
+      value: inflationVal,
+      operation: "increase",
+    },
+    {
+      type: "reputation",
+      value: reputationVal,
+      operation: "increase",
+    },
+    {
+      type: "insurgency",
+      value: insurgencyVal,
+      operation: "increase",
+    },
+  ];
+};

@@ -1,3 +1,5 @@
+require("colors");
+
 exports.makeId = (_length = 10) => {
   var text = "";
   var possible =
@@ -8,4 +10,34 @@ exports.makeId = (_length = 10) => {
   }
 
   return text;
+};
+
+/**
+ * Prints a consosle message with an special color
+ *
+ * @param {String} msg
+ * @param {String} type
+ */
+exports.printMessage = (msg, type = "") => {
+  switch (type) {
+    case "success":
+      console.log(`${msg}`.green);
+      break;
+
+    case "warning":
+      console.log(`${msg}`.yellow);
+      break;
+
+    case "advice":
+      console.log(`${msg}`.cyan);
+      break;
+
+    case "danger":
+      console.log(`${msg}`.red);
+      break;
+
+    default:
+      console.log(`${msg}`);
+      break;
+  }
 };

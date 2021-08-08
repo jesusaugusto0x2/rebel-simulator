@@ -1,6 +1,8 @@
 const { Operation } = require("../class.js");
 
 const Prob = require("../../../utils/probabilities.js");
+const { buildProbabilitySet } = require("../helpers.js");
+const { printMessage } = require("../../../utils/strings.js");
 
 const TYPE = "civilian";
 const BASE_TIME = 5;
@@ -17,7 +19,10 @@ class CivilianOp extends Operation {
   }
 
   execute(map, scheduler) {
-    console.log(`Running civilian operation execution function:`);
+    printMessage(
+      `    Calculating civilian operation probabilities of execution`,
+      `warning`
+    );
 
     if (Prob.getRandom() < this.servicesOperationProb) {
       this.serviceOperation(map, scheduler);
@@ -33,90 +38,45 @@ class CivilianOp extends Operation {
   }
 
   serviceOperation(map, scheduler) {
-    console.log(`Executing a service operation`);
+    printMessage(`    CIV OPERATION: Service`, `warning`);
 
-    const probabilitySet = [
-      {
-        type: "corruption",
-        value: 0.05,
-        operation: "increase",
-      },
-      {
-        type: "stability",
-        value: 0.03,
-        operation: "increase",
-      },
-      {
-        type: "inflation",
-        value: 0.02,
-        operation: "increase",
-      },
-      {
-        type: "reputation",
-        value: 0.01,
-        operation: "increase",
-      },
-    ];
+    const probs = buildProbabilitySet({
+      corruptionVal: 0.05,
+      stabilityVal: 0.03,
+      inflationVal: 0.02,
+      reputationVal: 0.01,
+      insurgencyVal: -0.02,
+    });
 
-    super.execute(map, scheduler, "civilan_service_operation", probabilitySet);
+    super.execute(map, scheduler, "civilan_service_operation", probs);
   }
 
   developmentOperation() {
-    console.log(`Executing a development operation`);
+    printMessage(`    CIV OPERATION: Development`, `warning`);
 
-    const probabilitySet = [
-      {
-        type: "corruption",
-        value: 0.08,
-        operation: "increase",
-      },
-      {
-        type: "stability",
-        value: 0.06,
-        operation: "increase",
-      },
-      {
-        type: "inflation",
-        value: 0.1,
-        operation: "increase",
-      },
-      {
-        type: "reputation",
-        value: 0.03,
-        operation: "increase",
-      },
-    ];
+    const probs = buildProbabilitySet({
+      corruptionVal: 0.08,
+      stabilityVal: 0.06,
+      inflationVal: 0.1,
+      reputationVal: 0.03,
+      insurgencyVal: -0.04,
+    });
 
-    super.execute(map, scheduler, "civilan_service_operation", probabilitySet);
+    super.execute(map, scheduler, "civilan_service_operation", probs);
   }
 
   infrastructureOperation() {
-    console.log(`Executing an infrastructure operation`);
+    printMessage(`    CIV OPERATION: Infrastructure`, `warning`);
 
-    const probabilitySet = [
-      {
-        type: "corruption",
-        value: 0.08,
-        operation: "increase",
-      },
-      {
-        type: "stability",
-        value: 0.1,
-        operation: "increase",
-      },
-      {
-        type: "inflation",
-        value: 0.07,
-        operation: "increase",
-      },
-      {
-        type: "reputation",
-        value: 0.05,
-        operation: "increase",
-      },
-    ];
+    const probs = buildProbabilitySet({
+      corruptionVal: 0.12,
+      stabilityVal: 0.07,
+      inflationVal: 0.18,
+      reputationVal: 0.14,
+      insurgencyVal: -0.05,
+    });
 
-    super.execute(map, scheduler, "civilan_service_operation", probabilitySet);
+    super.execute(map, scheduler, "civilan_service_operation", probs);
   }
 }
 

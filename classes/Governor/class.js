@@ -1,3 +1,4 @@
+const { printMessage } = require("../../utils/strings.js");
 const { CivilianOperation } = require("../Operation/Civilian/class.js");
 const { GovernmentOperation } = require("../Operation/Government/class.js");
 const { MilitaryOperation } = require("../Operation/Military/class.js");
@@ -20,10 +21,11 @@ class Governor {
   }
 
   executeOperation(map) {
-    console.log(`Governor is executing an operation...`);
+    printMessage(`Governor ${this.name} starts executing operations`, `advice`);
 
     if (Helper.evaluateCivilianOp(map)) {
-      console.log(`A civilan operation can be executed`);
+      printMessage(`    Civilian operation will be executed`, `advice`);
+
       this.civOp.execute(map, this.scheduler);
     }
   }

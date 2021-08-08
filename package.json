@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jesusaugusto0x2/rebel-simulator#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "probability-distributions": "^0.9.1"
   }
 }

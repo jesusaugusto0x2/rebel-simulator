@@ -17,7 +17,7 @@ class Scheduler {
 
     event.time = this.currentTime + _time;
 
-    console.log("Inserting a new event on: ", event);
+    console.log("New event insertion:", event);
 
     this.events.push(event);
   }
