@@ -36,6 +36,10 @@ exports.printMessage = (msg, type = "") => {
       console.log(`${msg}`.red);
       break;
 
+    case "magenta":
+      console.log(`${msg}`.magenta);
+      break;
+
     default:
       console.log(`${msg}`);
       break;

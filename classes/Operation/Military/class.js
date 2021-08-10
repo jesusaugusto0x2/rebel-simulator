@@ -41,11 +41,11 @@ class MilitaryOp extends Operation {
     printMessage(`    MIL OPERATION: Soldier Creation`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.02,
-      stabilityVal: -0.02,
-      insurgencyVal: -0.04,
-      inflationVal: 0.06,
-      reputationVal: 0.02,
+      corruptionVal: 0.01,
+      stabilityVal: -0.01,
+      insurgencyVal: -0.01,
+      inflationVal: 0.01,
+      reputationVal: 0.01,
     });
 
     super.execute(map, scheduler, "government_outreach_operation", probs);
@@ -56,10 +56,10 @@ class MilitaryOp extends Operation {
 
     const probs = buildProbabilitySet({
       corruptionVal: 0.01,
-      stabilityVal: -0.03,
-      insurgencyVal: -0.03,
-      inflationVal: 0.12,
-      reputationVal: 0.08,
+      stabilityVal: -0.01,
+      insurgencyVal: -0.01,
+      inflationVal: 0.01,
+      reputationVal: 0.01,
     });
 
     super.execute(map, scheduler, "government_outreach_operation", probs);
@@ -69,11 +69,11 @@ class MilitaryOp extends Operation {
     printMessage(`    MIL OPERATION: Strike`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.02,
-      stabilityVal: -0.05,
-      insurgencyVal: -0.02,
-      inflationVal: 0.05,
-      reputationVal: -0.03,
+      corruptionVal: 0.01,
+      stabilityVal: -0.01,
+      insurgencyVal: -0.01,
+      inflationVal: 0.01,
+      reputationVal: -0.01,
     });
 
     super.execute(map, scheduler, "government_outreach_operation", probs);

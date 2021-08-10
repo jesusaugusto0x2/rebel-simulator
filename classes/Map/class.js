@@ -49,6 +49,21 @@ class Map {
     this.budget -= value;
   }
 
+  printValues() {
+    const builtStats = {
+      corruption: this.corruption,
+      inflation: this.inflation,
+      insurgency: this.insurgency,
+      reputation: this.reputation,
+      stability: this.stability,
+    };
+
+    printMessage(
+      `  Self probability values: ${JSON.stringify(builtStats, null, 4)}`,
+      `magenta`
+    );
+  }
+
   evaluate() {
     printMessage(
       `Evaluating map state on ${this.scheduler.getCurrentTime()} week`,
@@ -62,6 +77,8 @@ class Map {
     Helper.checkSelfProbabilities(this);
 
     this.governor.executeOperation(this);
+
+    this.printValues();
   }
 }
 

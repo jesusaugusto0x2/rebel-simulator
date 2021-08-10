@@ -31,27 +31,22 @@ exports.buildProbabilitySet = ({
     {
       type: "corruption",
       value: corruptionVal,
-      operation: "increase",
     },
     {
       type: "stability",
       value: stabilityVal,
-      operation: "increase",
     },
     {
       type: "inflation",
       value: inflationVal,
-      operation: "increase",
     },
     {
       type: "reputation",
       value: reputationVal,
-      operation: "increase",
     },
     {
       type: "insurgency",
       value: insurgencyVal,
-      operation: "increase",
     },
   ];
 };

@@ -42,9 +42,9 @@ class CivilianOp extends Operation {
 
     const probs = buildProbabilitySet({
       corruptionVal: 0.01,
-      stabilityVal: 0.02,
-      insurgencyVal: -0.02,
-      inflationVal: 0.6,
+      stabilityVal: 0.01,
+      insurgencyVal: -0.01,
+      inflationVal: 0.01,
       reputationVal: 0.01,
     });
 
@@ -55,11 +55,11 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Development`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.02,
-      stabilityVal: 0.04,
+      corruptionVal: 0.01,
+      stabilityVal: 0.01,
       insurgencyVal: -0.01,
       inflationVal: 0.1,
-      reputationVal: 0.03,
+      reputationVal: 0.01,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);
@@ -69,11 +69,11 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Infrastructure`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.03,
-      stabilityVal: 0.05,
-      insurgencyVal: -0.03,
-      inflationVal: 0.08,
-      reputationVal: 0.14,
+      corruptionVal: 0.01,
+      stabilityVal: 0.01,
+      insurgencyVal: -0.01,
+      inflationVal: 0.01,
+      reputationVal: 0.1,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);
