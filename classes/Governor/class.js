@@ -23,10 +23,16 @@ class Governor {
   executeOperation(map) {
     printMessage(`Governor ${this.name} starts executing operations`, `advice`);
 
-    if (Helper.evaluateCivilianOp(map)) {
+    if (Helper.evaluateCivilianOp(map) === true) {
       printMessage(`    Civilian operation will be executed`, `advice`);
 
       this.civOp.execute(map, this.scheduler);
+    }
+
+    if (Helper.evaluateGovernmentOp(map) === true) {
+      printMessage(`    Government operation will be executed`, `advice`);
+
+      this.govOp.execute(map, this.scheduler);
     }
   }
 }

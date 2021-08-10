@@ -14,29 +14,34 @@ class Map {
     this.supportPopulation = PD.rint(1, 400, 500, false)[0];
     this.insurgentDiplomacy = PD.runif(100)[0];
 
+    // Common fluctuating value
     this.corruption = {
-      prob: 0.05,
+      prob: 0.15,
       value: 5,
     };
 
+    // Common fluctuating value
     this.inflation = {
       prob: 0.01,
       value: 5,
     };
 
+    // Common fluctuating value
+    this.insurgency = {
+      prob: 0.7,
+      value: 25,
+    };
+
+    // Game decider
     this.reputation = {
       prob: 0.01,
-      value: 95, // Game variant
+      value: 95,
     };
 
+    // Game decider
     this.stability = {
       prob: 0.01,
-      value: 0, // Game variant
-    };
-
-    this.insurgency = {
-      prob: 0.06,
-      value: 5,
+      value: 0,
     };
   }
 

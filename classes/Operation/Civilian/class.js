@@ -5,7 +5,7 @@ const { buildProbabilitySet } = require("../helpers.js");
 const { printMessage } = require("../../../utils/strings.js");
 
 const TYPE = "civilian";
-const BASE_TIME = 5;
+const BASE_TIME = 2;
 const BASE_PRICE = 4;
 
 class CivilianOp extends Operation {
@@ -29,11 +29,11 @@ class CivilianOp extends Operation {
     }
 
     if (Prob.getRandom() < this.developmentOperation) {
-      this.developmentOperation();
+      this.developmentOperation(map, scheduler);
     }
 
     if (Prob.getRandom() < this.infrastructureOperation) {
-      this.infrastructureOperation();
+      this.infrastructureOperation(map, scheduler);
     }
   }
 
@@ -41,39 +41,39 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Service`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.05,
-      stabilityVal: 0.03,
-      inflationVal: 0.02,
-      reputationVal: 0.01,
+      corruptionVal: 0.01,
+      stabilityVal: 0.02,
       insurgencyVal: -0.02,
+      inflationVal: 0.6,
+      reputationVal: 0.01,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);
   }
 
-  developmentOperation() {
+  developmentOperation(map, scheduler) {
     printMessage(`    CIV OPERATION: Development`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.08,
-      stabilityVal: 0.06,
+      corruptionVal: 0.03,
+      stabilityVal: 0.04,
+      insurgencyVal: -0.01,
       inflationVal: 0.1,
       reputationVal: 0.03,
-      insurgencyVal: -0.04,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);
   }
 
-  infrastructureOperation() {
+  infrastructureOperation(map, scheduler) {
     printMessage(`    CIV OPERATION: Infrastructure`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.12,
-      stabilityVal: 0.07,
-      inflationVal: 0.18,
+      corruptionVal: 0.04,
+      stabilityVal: 0.05,
+      insurgencyVal: -0.03,
+      inflationVal: 0.08,
       reputationVal: 0.14,
-      insurgencyVal: -0.05,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);

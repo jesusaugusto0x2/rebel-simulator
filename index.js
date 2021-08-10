@@ -16,7 +16,7 @@ const simulate = async () => {
 
     scheduler.stepAhead();
 
-    await sleep(1000);
+    await sleep(2000);
   }
 };
 
