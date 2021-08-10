@@ -34,6 +34,12 @@ class Governor {
 
       this.govOp.execute(map, this.scheduler);
     }
+
+    if (Helper.evaluateMilitaryOp(map) === true) {
+      printMessage(`    Military operation will be executed`, `advice`);
+
+      this.govOp.execute(map, this.scheduler);
+    }
   }
 }
 

@@ -6,7 +6,7 @@ const { printMessage } = require("../../../utils/strings.js");
 
 const TYPE = "civilian";
 const BASE_TIME = 2;
-const BASE_PRICE = 4;
+const BASE_PRICE = 3;
 
 class CivilianOp extends Operation {
   constructor() {
@@ -55,7 +55,7 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Development`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.03,
+      corruptionVal: 0.02,
       stabilityVal: 0.04,
       insurgencyVal: -0.01,
       inflationVal: 0.1,
@@ -69,7 +69,7 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Infrastructure`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.04,
+      corruptionVal: 0.03,
       stabilityVal: 0.05,
       insurgencyVal: -0.03,
       inflationVal: 0.08,

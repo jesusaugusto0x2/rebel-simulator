@@ -6,7 +6,7 @@ const { printMessage } = require("../../../utils/strings.js");
 
 const TYPE = "government";
 const BASE_TIME = 3;
-const BASE_PRICE = 6;
+const BASE_PRICE = 5;
 
 class GovernmentOp extends Operation {
   constructor() {
@@ -41,7 +41,7 @@ class GovernmentOp extends Operation {
     printMessage(`    GOB OPERATION: Outreach`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: -0.01,
+      corruptionVal: -0.02,
       stabilityVal: 0.03,
       insurgencyVal: 0.02,
       inflationVal: 0.06,
@@ -69,7 +69,7 @@ class GovernmentOp extends Operation {
     printMessage(`    GOB OPERATION: Democratic`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: -0.01,
+      corruptionVal: -0.02,
       stabilityVal: 0.03,
       inflationVal: 0.05,
       reputationVal: 0.04,
