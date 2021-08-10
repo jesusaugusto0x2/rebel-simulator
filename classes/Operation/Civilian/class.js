@@ -1,8 +1,13 @@
 const { Operation } = require("../class.js");
 
 const Prob = require("../../../utils/probabilities.js");
-const { buildProbabilitySet } = require("../helpers.js");
 const { printMessage } = require("../../../utils/strings.js");
+const {
+  buildProbabilitySet,
+  LOW_PROB,
+  MED_PROB,
+  HIGH_PROB,
+} = require("../helpers.js");
 
 const TYPE = "civilian";
 const BASE_TIME = 2;
@@ -41,11 +46,11 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Service`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.01,
-      stabilityVal: 0.01,
-      insurgencyVal: -0.01,
-      inflationVal: 0.01,
-      reputationVal: 0.01,
+      corruptionVal: LOW_PROB,
+      stabilityVal: LOW_PROB,
+      insurgencyVal: -LOW_PROB,
+      inflationVal: LOW_PROB,
+      reputationVal: LOW_PROB,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);
@@ -55,11 +60,11 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Development`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.01,
-      stabilityVal: 0.01,
-      insurgencyVal: -0.01,
-      inflationVal: 0.1,
-      reputationVal: 0.01,
+      corruptionVal: LOW_PROB,
+      stabilityVal: LOW_PROB,
+      insurgencyVal: -LOW_PROB,
+      inflationVal: LOW_PROB,
+      reputationVal: LOW_PROB,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);
@@ -69,11 +74,11 @@ class CivilianOp extends Operation {
     printMessage(`    CIV OPERATION: Infrastructure`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: 0.01,
-      stabilityVal: 0.01,
-      insurgencyVal: -0.01,
-      inflationVal: 0.01,
-      reputationVal: 0.1,
+      corruptionVal: LOW_PROB,
+      stabilityVal: LOW_PROB,
+      insurgencyVal: -LOW_PROB,
+      inflationVal: LOW_PROB,
+      reputationVal: LOW_PROB,
     });
 
     super.execute(map, scheduler, "civilan_service_operation", probs);

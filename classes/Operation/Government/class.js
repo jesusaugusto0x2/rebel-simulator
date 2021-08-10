@@ -1,8 +1,13 @@
 const { Operation } = require("../class.js");
 
 const Prob = require("../../../utils/probabilities.js");
-const { buildProbabilitySet } = require("../helpers.js");
 const { printMessage } = require("../../../utils/strings.js");
+const {
+  buildProbabilitySet,
+  LOW_PROB,
+  MED_PROB,
+  HIGH_PROB,
+} = require("../helpers.js");
 
 const TYPE = "government";
 const BASE_TIME = 3;
@@ -41,11 +46,11 @@ class GovernmentOp extends Operation {
     printMessage(`    GOB OPERATION: Outreach`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: -0.01,
-      stabilityVal: 0.01,
-      insurgencyVal: 0.01,
-      inflationVal: 0.01,
-      reputationVal: 0.01,
+      corruptionVal: -LOW_PROB,
+      stabilityVal: LOW_PROB,
+      insurgencyVal: LOW_PROB,
+      inflationVal: LOW_PROB,
+      reputationVal: LOW_PROB,
     });
 
     super.execute(map, scheduler, "government_outreach_operation", probs);
@@ -55,11 +60,11 @@ class GovernmentOp extends Operation {
     printMessage(`    GOB OPERATION: Anti-corruptive`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: -0.01,
-      stabilityVal: 0.01,
-      insurgencyVal: -0.01,
-      inflationVal: 0.01,
-      reputationVal: 0.01,
+      corruptionVal: -LOW_PROB,
+      stabilityVal: LOW_PROB,
+      insurgencyVal: -LOW_PROB,
+      inflationVal: LOW_PROB,
+      reputationVal: LOW_PROB,
     });
 
     super.execute(map, scheduler, "government_outreach_operation", probs);
@@ -69,11 +74,11 @@ class GovernmentOp extends Operation {
     printMessage(`    GOB OPERATION: Democratic`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: -0.01,
-      stabilityVal: 0.01,
-      inflationVal: 0.01,
-      reputationVal: 0.01,
-      insurgencyVal: 0.01,
+      corruptionVal: -LOW_PROB,
+      stabilityVal: LOW_PROB,
+      inflationVal: LOW_PROB,
+      reputationVal: LOW_PROB,
+      insurgencyVal: LOW_PROB,
     });
 
     super.execute(map, scheduler, "government_outreach_operation", probs);

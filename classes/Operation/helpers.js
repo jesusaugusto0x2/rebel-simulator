@@ -50,3 +50,9 @@ exports.buildProbabilitySet = ({
     },
   ];
 };
+
+exports.LOW_PROB = 0.01;
+exports.MED_LOW_PROB = 0.02;
+exports.MED_PROB = 0.03;
+exports.MED_HIGH_PROB = 0.04;
+exports.HIGH_PROB = 0.05;
