@@ -71,7 +71,7 @@ exports.evaluateGovernmentOp = map => {
  */
 exports.evaluateMilitaryOp = map => {
   const insurgencyProb = map.insurgency.prob;
-  const stabilityProb = map.stability.prob;
+  // const stabilityProb = map.stability.prob;
 
   printMessage(
     `  Needed probabilities for military operation execution: `,
@@ -79,14 +79,14 @@ exports.evaluateMilitaryOp = map => {
   );
 
   printMessage(`  Insurgency prob: ${insurgencyProb}`, `warning`);
-  printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
+  // printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
 
-  const commonProb = Probs.joinExcludentProbs(stabilityProb, insurgencyProb);
+  // const commonProb = Probs.joinExcludentProbs(stabilityProb, insurgencyProb);
 
   printMessage(
-    `  Resulting prob: ${commonProb}% chances of executing a Government Operation`,
+    `  Resulting prob: ${insurgencyProb}% chances of executing a Government Operation`,
     `success`
   );
 
-  return Probs.getRandom() < commonProb;
+  return Probs.getRandom() < insurgencyProb;
 };

@@ -90,7 +90,7 @@ class MilitaryOp extends Operation {
     printMessage(`    MIL OPERATION: Strike`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: MED_PROB,
+      corruptionVal: HIGH_PROB,
       stabilityVal: -MED_HIGH_PROB,
       insurgencyVal: -MED_HIGH_PROB,
       inflationVal: MED_HIGH_PROB,

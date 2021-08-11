@@ -12,11 +12,11 @@ const simulate = async () => {
   while (map.stability.value < 100 || map.reputation.value > 0) {
     map.evaluate();
 
-    console.log(`------------------`);
+    console.log(`-------------------------------------------------------`);
 
     scheduler.stepAhead();
 
-    await sleep(2000);
+    await sleep(1000);
   }
 };
 

@@ -71,7 +71,7 @@ class CivilianOp extends Operation {
     const probs = buildProbabilitySet({
       corruptionVal: MED_LOW_PROB,
       stabilityVal: MED_HIGH_PROB,
-      insurgencyVal: -MED_PROB,
+      insurgencyVal: -MED_LOW_PROB,
       inflationVal: MED_PROB,
       reputationVal: MED_LOW_PROB,
     });

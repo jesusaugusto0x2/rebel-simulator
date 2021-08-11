@@ -28,7 +28,7 @@ class Map {
 
     // Common fluctuating value
     this.insurgency = {
-      prob: 0.7,
+      prob: 0.12,
       value: 25,
     };
 

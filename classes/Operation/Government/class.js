@@ -50,8 +50,8 @@ class GovernmentOp extends Operation {
     const probs = buildProbabilitySet({
       corruptionVal: -MED_LOW_PROB,
       stabilityVal: LOW_PROB,
-      insurgencyVal: -LOW_PROB,
-      inflationVal: LOW_PROB,
+      insurgencyVal: LOW_PROB,
+      inflationVal: -LOW_PROB,
       reputationVal: LOW_PROB,
     });
 
@@ -71,8 +71,8 @@ class GovernmentOp extends Operation {
     const probs = buildProbabilitySet({
       corruptionVal: -MED_PROB,
       stabilityVal: MED_LOW_PROB,
-      insurgencyVal: -MED_PROB,
-      inflationVal: MED_HIGH_PROB,
+      insurgencyVal: MED_PROB,
+      inflationVal: -MED_HIGH_PROB,
       reputationVal: MED_LOW_PROB,
     });
 
@@ -92,8 +92,8 @@ class GovernmentOp extends Operation {
     const probs = buildProbabilitySet({
       corruptionVal: -HIGH_PROB,
       stabilityVal: MED_HIGH_PROB,
-      insurgencyVal: -HIGH_PROB,
-      inflationVal: MED_HIGH_PROB,
+      insurgencyVal: MED_HIGH_PROB,
+      inflationVal: -MED_HIGH_PROB,
       reputationVal: MED_HIGH_PROB,
     });
 
