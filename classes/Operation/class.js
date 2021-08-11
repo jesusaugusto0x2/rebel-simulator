@@ -1,26 +1,24 @@
 const { printMessage } = require("../../utils/strings");
 
 class Operation {
-  constructor(type, baseTime, basePrice) {
+  constructor(type) {
     this.type = type;
-    this.baseTime = baseTime;
-    this.basePrice = basePrice;
   }
 
-  execute(map, scheduler, operationType, probabilitySet) {
-    if (map.budget < this.basePrice) {
+  execute(map, scheduler, operationType, probabilitySet, opPrice, opTime) {
+    if (map.budget < opPrice) {
       printMessage(`Couldn't perform operation due to low budget`, "danger");
       return null;
     }
 
-    map.reduceBudget(this.basePrice);
+    map.reduceBudget(opPrice);
 
     scheduler.setEvent(
       {
         operation: operationType,
         probabilities: probabilitySet,
       },
-      this.baseTime
+      opTime
     );
   }
 }

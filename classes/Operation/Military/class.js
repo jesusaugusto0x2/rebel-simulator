@@ -4,23 +4,23 @@ const Prob = require("../../../utils/probabilities.js");
 const { printMessage } = require("../../../utils/strings.js");
 const {
   buildProbabilitySet,
+  getBudgetProbs,
   LOW_PROB,
   MED_PROB,
   HIGH_PROB,
+  LOW_PRICE,
+  MED_PRICE,
+  HIGH_PRICE,
+  LOW_TIME,
+  MED_TIME,
+  HIGH_TIME,
 } = require("../helpers.js");
 
 const TYPE = "government";
-const BASE_TIME = 5;
-const BASE_PRICE = 6;
 
 class MilitaryOp extends Operation {
   constructor() {
-    super(TYPE, BASE_TIME, BASE_PRICE);
-
-    // Starts with same execution probabilities
-    this.createSoldierProb = 0.33;
-    this.civilSupportProb = 0.33;
-    this.strikeProb = 0.33;
+    super(TYPE);
   }
 
   execute(map, scheduler) {
@@ -29,15 +29,17 @@ class MilitaryOp extends Operation {
       `warning`
     );
 
-    if (Prob.getRandom() < this.createSoldierProb) {
+    const { firstProb, secondProb, thirdProb } = getBudgetProbs(map);
+
+    if (Prob.getRandom() < firstProb) {
       this.createSoldierOperation(map, scheduler);
     }
 
-    if (Prob.getRandom() < this.civilSupportProb) {
+    if (Prob.getRandom() < secondProb) {
       this.civilSupportOperation(map, scheduler);
     }
 
-    if (Prob.getRandom() < this.strikeProb) {
+    if (Prob.getRandom() < thirdProb) {
       this.strikeOperation(map, scheduler);
     }
   }
@@ -53,7 +55,14 @@ class MilitaryOp extends Operation {
       reputationVal: LOW_PROB,
     });
 
-    super.execute(map, scheduler, "government_outreach_operation", probs);
+    super.execute(
+      map,
+      scheduler,
+      "government_outreach_operation",
+      probs,
+      LOW_PRICE,
+      LOW_TIME
+    );
   }
 
   civilSupportOperation(map, scheduler) {
@@ -67,7 +76,14 @@ class MilitaryOp extends Operation {
       reputationVal: LOW_PROB,
     });
 
-    super.execute(map, scheduler, "government_outreach_operation", probs);
+    super.execute(
+      map,
+      scheduler,
+      "government_outreach_operation",
+      probs,
+      MED_PRICE,
+      MED_TIME
+    );
   }
 
   strikeOperation(map, scheduler) {
@@ -81,7 +97,14 @@ class MilitaryOp extends Operation {
       reputationVal: -LOW_PROB,
     });
 
-    super.execute(map, scheduler, "government_outreach_operation", probs);
+    super.execute(
+      map,
+      scheduler,
+      "government_outreach_operation",
+      probs,
+      HIGH_PRICE,
+      HIGH_TIME
+    );
   }
 }
 

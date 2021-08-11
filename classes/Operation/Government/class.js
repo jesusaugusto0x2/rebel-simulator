@@ -4,23 +4,23 @@ const Prob = require("../../../utils/probabilities.js");
 const { printMessage } = require("../../../utils/strings.js");
 const {
   buildProbabilitySet,
+  getBudgetProbs,
   LOW_PROB,
   MED_PROB,
   HIGH_PROB,
+  LOW_PRICE,
+  MED_PRICE,
+  HIGH_PRICE,
+  LOW_TIME,
+  MED_TIME,
+  HIGH_TIME,
 } = require("../helpers.js");
 
 const TYPE = "government";
-const BASE_TIME = 3;
-const BASE_PRICE = 5;
 
 class GovernmentOp extends Operation {
   constructor() {
-    super(TYPE, BASE_TIME, BASE_PRICE);
-
-    // Starts with same execution probabilities
-    this.outreachOperationProb = 0.33;
-    this.antiCorruptiveOperationProb = 0.33;
-    this.democraticOperationProb = 0.33;
+    super(TYPE);
   }
 
   execute(map, scheduler) {
@@ -29,15 +29,17 @@ class GovernmentOp extends Operation {
       `warning`
     );
 
-    if (Prob.getRandom() < this.outreachOperationProb) {
+    const { firstProb, secondProb, thirdProb } = getBudgetProbs(map);
+
+    if (Prob.getRandom() < firstProb) {
       this.outreachOperation(map, scheduler);
     }
 
-    if (Prob.getRandom() < this.antiCorruptiveOperationProb) {
+    if (Prob.getRandom() < secondProb) {
       this.antiCorruptiveOperation(map, scheduler);
     }
 
-    if (Prob.getRandom() < this.democraticOperationProb) {
+    if (Prob.getRandom() < thirdProb) {
       this.democraticOperation(map, scheduler);
     }
   }
@@ -53,7 +55,14 @@ class GovernmentOp extends Operation {
       reputationVal: LOW_PROB,
     });
 
-    super.execute(map, scheduler, "government_outreach_operation", probs);
+    super.execute(
+      map,
+      scheduler,
+      "government_outreach_operation",
+      probs,
+      LOW_PRICE,
+      LOW_TIME
+    );
   }
 
   antiCorruptiveOperation(map, scheduler) {
@@ -67,7 +76,14 @@ class GovernmentOp extends Operation {
       reputationVal: LOW_PROB,
     });
 
-    super.execute(map, scheduler, "government_outreach_operation", probs);
+    super.execute(
+      map,
+      scheduler,
+      "government_outreach_operation",
+      probs,
+      MED_PRICE,
+      MED_TIME
+    );
   }
 
   democraticOperation(map, scheduler) {
@@ -81,7 +97,14 @@ class GovernmentOp extends Operation {
       insurgencyVal: LOW_PROB,
     });
 
-    super.execute(map, scheduler, "government_outreach_operation", probs);
+    super.execute(
+      map,
+      scheduler,
+      "government_outreach_operation",
+      probs,
+      HIGH_PRICE,
+      HIGH_TIME
+    );
   }
 }
 
