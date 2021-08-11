@@ -6,7 +6,9 @@ const {
   buildProbabilitySet,
   getBudgetProbs,
   LOW_PROB,
+  MED_LOW_PROB,
   MED_PROB,
+  MED_HIGH_PROB,
   HIGH_PROB,
   LOW_PRICE,
   MED_PRICE,
@@ -31,15 +33,13 @@ class MilitaryOp extends Operation {
 
     const { firstProb, secondProb, thirdProb } = getBudgetProbs(map);
 
-    if (Prob.getRandom() < firstProb) {
+    const executionProb = Prob.getRandom();
+
+    if (executionProb < firstProb) {
       this.createSoldierOperation(map, scheduler);
-    }
-
-    if (Prob.getRandom() < secondProb) {
+    } else if (executionProb >= firstProb && executionProb < secondProb) {
       this.civilSupportOperation(map, scheduler);
-    }
-
-    if (Prob.getRandom() < thirdProb) {
+    } else if (executionProb >= secondProb && executionProb <= thirdProb) {
       this.strikeOperation(map, scheduler);
     }
   }
@@ -49,9 +49,9 @@ class MilitaryOp extends Operation {
 
     const probs = buildProbabilitySet({
       corruptionVal: LOW_PROB,
-      stabilityVal: -LOW_PROB,
-      insurgencyVal: -LOW_PROB,
-      inflationVal: LOW_PROB,
+      stabilityVal: -MED_LOW_PROB,
+      insurgencyVal: -MED_LOW_PROB,
+      inflationVal: MED_LOW_PROB,
       reputationVal: LOW_PROB,
     });
 
@@ -69,11 +69,11 @@ class MilitaryOp extends Operation {
     printMessage(`    MIL OPERATION: Civil Support`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: LOW_PROB,
-      stabilityVal: -LOW_PROB,
-      insurgencyVal: -LOW_PROB,
-      inflationVal: LOW_PROB,
-      reputationVal: LOW_PROB,
+      corruptionVal: MED_LOW_PROB,
+      stabilityVal: -MED_HIGH_PROB,
+      insurgencyVal: -MED_HIGH_PROB,
+      inflationVal: MED_PROB,
+      reputationVal: MED_LOW_PROB,
     });
 
     super.execute(
@@ -90,11 +90,11 @@ class MilitaryOp extends Operation {
     printMessage(`    MIL OPERATION: Strike`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: LOW_PROB,
-      stabilityVal: -LOW_PROB,
-      insurgencyVal: -LOW_PROB,
-      inflationVal: LOW_PROB,
-      reputationVal: -LOW_PROB,
+      corruptionVal: MED_PROB,
+      stabilityVal: -MED_HIGH_PROB,
+      insurgencyVal: -MED_HIGH_PROB,
+      inflationVal: MED_HIGH_PROB,
+      reputationVal: -MED_HIGH_PROB,
     });
 
     super.execute(

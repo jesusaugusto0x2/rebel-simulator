@@ -19,13 +19,13 @@ exports.evaluateCivilianOp = map => {
     `advice`
   );
 
-  printMessage(`  1 - Stability prob: ${stabilityProb}`, `warning`);
-  printMessage(`  1 - Corruption prob: ${corruptionProb}`, `warning`);
+  printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
+  printMessage(`  Corruption prob: ${corruptionProb}`, `warning`);
 
   const commonProb = Probs.joinExcludentProbs(stabilityProb, corruptionProb);
 
   printMessage(
-    `  Resulting prob: 1 - ${commonProb} chances of executing a Civilian Operation`,
+    `  Resulting prob: ${commonProb} chances of executing a Civilian Operation`,
     `success`
   );
 
