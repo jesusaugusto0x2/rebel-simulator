@@ -35,7 +35,7 @@ class Map {
     // Game decider
     this.reputation = {
       prob: 0.01,
-      value: 95,
+      value: 75,
     };
 
     // Game decider
@@ -74,6 +74,8 @@ class Map {
     Helper.checkSelfProbabilities(this);
 
     this.governor.executeOperation(this);
+
+    Helper.selfUpdateByProbs(this);
 
     this.printValues();
   }
