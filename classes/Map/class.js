@@ -52,13 +52,21 @@ class Map {
   printValues() {
     printMessage(
       `  Self probability values:
-        Stability: { prob: ${this.stability.prob}, val: ${this.stability.value}}
-        Insurgency: { prob: ${this.insurgency.prob}, val: ${this.insurgency.value}}
-        Corruption: { prob: ${this.corruption.prob}, val: ${this.corruption.value}}
-        Reputation: { prob: ${this.reputation.prob}, val: ${this.reputation.value}}
-        Inflation: { prob: ${this.inflation.prob}, val: ${this.inflation.value}}`,
+        Stability: { prob: ${this.stability.prob.toFixed(2)}, val: ${this.stability.value.toFixed(2)}}
+        Insurgency: { prob: ${this.insurgency.prob.toFixed(2)}, val: ${this.insurgency.value.toFixed(2)}}
+        Corruption: { prob: ${this.corruption.prob.toFixed(2)}, val: ${this.corruption.value.toFixed(2)}}
+        Reputation: { prob: ${this.reputation.prob.toFixed(2)}, val: ${this.reputation.value.toFixed(2)}}
+        Inflation: { prob: ${this.inflation.prob.toFixed(2)}, val: ${this.inflation.value.toFixed(2)}}`,
       `magenta`
     );
+  }
+
+  runValuesEffect() {
+    this.insurgency.value < 40 ?
+      this.stability.value += 0.01 * this.reputation.value
+      :this.stability.value -= 0.02 * this.insurgency.value;
+    this.reputation.value -= 0.01 * (this.corruption.value+this.insurgency.value);
+    this.reputation.value += 0.02 * this.stability.value;
   }
 
   evaluate() {
@@ -76,6 +84,8 @@ class Map {
     this.governor.executeOperation(this);
 
     Helper.selfUpdateByProbs(this);
+
+    this.runValuesEffect();
 
     this.printValues();
   }
