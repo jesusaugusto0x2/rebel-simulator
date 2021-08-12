@@ -22,13 +22,13 @@ class Map {
 
     // Common fluctuating value
     this.inflation = {
-      prob: 0.01,
+      prob: 0.15,
       value: 5,
     };
 
     // Common fluctuating value
     this.insurgency = {
-      prob: 0.12,
+      prob: 0.25,
       value: 25,
     };
 
