@@ -50,16 +50,13 @@ class Map {
   }
 
   printValues() {
-    const builtStats = {
-      corruption: this.corruption,
-      inflation: this.inflation,
-      insurgency: this.insurgency,
-      reputation: this.reputation,
-      stability: this.stability,
-    };
-
     printMessage(
-      `  Self probability values: ${JSON.stringify(builtStats, null, 4)}`,
+      `  Self probability values:
+        Stability: { prob: ${this.stability.prob}, val: ${this.stability.value}}
+        Insurgency: { prob: ${this.insurgency.prob}, val: ${this.insurgency.value}}
+        Corruption: { prob: ${this.corruption.prob}, val: ${this.corruption.value}}
+        Reputation: { prob: ${this.reputation.prob}, val: ${this.reputation.value}}
+        Inflation: { prob: ${this.inflation.prob}, val: ${this.inflation.value}}`,
       `magenta`
     );
   }

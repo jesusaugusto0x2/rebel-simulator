@@ -12,7 +12,7 @@ const { printMessage } = require("../../utils/strings.js");
  */
 exports.evaluateCivilianOp = map => {
   const stabilityProb = map.stability.prob;
-  const corruptionProb = map.corruption.prob;
+  // const corruptionProb = map.corruption.prob;
 
   printMessage(
     `  Needed probabilities for civilan operation execution: `,
@@ -20,16 +20,16 @@ exports.evaluateCivilianOp = map => {
   );
 
   printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
-  printMessage(`  Corruption prob: ${corruptionProb}`, `warning`);
+  // printMessage(`  Corruption prob: ${corruptionProb}`, `warning`);
 
-  const commonProb = Probs.joinExcludentProbs(stabilityProb, corruptionProb);
+  // const commonProb = Probs.joinExcludentProbs(stabilityProb, corruptionProb);
 
   printMessage(
-    `  Resulting prob: ${commonProb} chances of executing a Civilian Operation`,
+    `  Resulting prob: ${stabilityProb} chances of executing a Civilian Operation`,
     `success`
   );
 
-  return Probs.getRandom() > commonProb;
+  return Probs.getRandom() > stabilityProb;
 };
 
 /**

@@ -20,14 +20,12 @@ exports.incrementBudget = map => {
 exports.runEvents = map => {
   const eventList = map.scheduler.getCurrentEvents();
 
-  // printMessage(`Current list of events: ${eventList}`);
-
-  console.log(`Current list of events`, eventList);
-
   // Get the current stored events of a time instance
   for (const evt of eventList) {
     // Get all the probability set sent through the event
     for (const probObject of evt.probabilities) {
+      console.log(`Running probability event object: `, probObject);
+
       // Sum the type probability with value on the map item
       map[probObject.type].prob += probObject.value;
     }

@@ -48,7 +48,7 @@ class GovernmentOp extends Operation {
     printMessage(`    GOB OPERATION: Outreach`, `warning`);
 
     const probs = buildProbabilitySet({
-      corruptionVal: -MED_LOW_PROB,
+      corruptionVal: -LOW_PROB,
       stabilityVal: LOW_PROB,
       insurgencyVal: LOW_PROB,
       inflationVal: -LOW_PROB,
@@ -70,10 +70,10 @@ class GovernmentOp extends Operation {
 
     const probs = buildProbabilitySet({
       corruptionVal: -MED_PROB,
-      stabilityVal: MED_LOW_PROB,
+      stabilityVal: MED_PROB,
       insurgencyVal: MED_PROB,
-      inflationVal: -MED_HIGH_PROB,
-      reputationVal: MED_LOW_PROB,
+      inflationVal: -MED_PROB,
+      reputationVal: MED_PROB,
     });
 
     super.execute(
@@ -91,10 +91,10 @@ class GovernmentOp extends Operation {
 
     const probs = buildProbabilitySet({
       corruptionVal: -HIGH_PROB,
-      stabilityVal: MED_HIGH_PROB,
-      insurgencyVal: MED_HIGH_PROB,
-      inflationVal: -MED_HIGH_PROB,
-      reputationVal: MED_HIGH_PROB,
+      stabilityVal: HIGH_PROB,
+      insurgencyVal: HIGH_PROB,
+      inflationVal: -HIGH_PROB,
+      reputationVal: HIGH_PROB,
     });
 
     super.execute(
