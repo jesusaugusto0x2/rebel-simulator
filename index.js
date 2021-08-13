@@ -3,6 +3,7 @@ const { Map } = require("./classes/Map/class.js");
 const { Governor } = require("./classes/Governor/class.js");
 const { makeId } = require("./utils/strings.js");
 const { sleep } = require("./utils/time.js");
+const { getUniformRandom } = require("./utils/probabilities.js");
 
 const simulate = async () => {
   const scheduler = new Scheduler();
@@ -16,7 +17,7 @@ const simulate = async () => {
 
     scheduler.stepAhead();
 
-    await sleep(800);
+    await sleep(500);
 
     if (map.stability.value > 100) {
       console.log(` YOU HAVE WON THE GAME`);
@@ -31,3 +32,5 @@ const simulate = async () => {
 };
 
 simulate();
+
+// console.log(`Prob number`, getUniformRandom(0.01, 0.15));

@@ -1,6 +1,10 @@
 const PD = require("probability-distributions");
+const { getUniformRandom } = require("../../utils/probabilities.js");
 const { printMessage } = require("../../utils/strings.js");
 const Helper = require("./helpers.js");
+
+const DECIMAL_ADJUST = 2;
+const MINIMUM_ADJUSTABLE_PROB = 0.02;
 
 class Map {
   constructor(name, scheduler, governor) {
@@ -34,14 +38,14 @@ class Map {
 
     // Game decider
     this.reputation = {
-      prob: 0.01,
+      prob: 0.03,
       value: 75,
     };
 
     // Game decider
     this.stability = {
       prob: 0.01,
-      value: 0,
+      value: 5,
     };
   }
 
@@ -52,21 +56,54 @@ class Map {
   printValues() {
     printMessage(
       `  Self probability values:
-        Stability: { prob: ${this.stability.prob.toFixed(2)}, val: ${this.stability.value.toFixed(2)}}
-        Insurgency: { prob: ${this.insurgency.prob.toFixed(2)}, val: ${this.insurgency.value.toFixed(2)}}
-        Corruption: { prob: ${this.corruption.prob.toFixed(2)}, val: ${this.corruption.value.toFixed(2)}}
-        Reputation: { prob: ${this.reputation.prob.toFixed(2)}, val: ${this.reputation.value.toFixed(2)}}
-        Inflation: { prob: ${this.inflation.prob.toFixed(2)}, val: ${this.inflation.value.toFixed(2)}}`,
+        Stability: { prob: ${this.stability.prob.toFixed(
+          DECIMAL_ADJUST
+        )}, val: ${this.stability.value}}
+        Insurgency: { prob: ${this.insurgency.prob.toFixed(
+          DECIMAL_ADJUST
+        )}, val: ${this.insurgency.value}}
+        Corruption: { prob: ${this.corruption.prob.toFixed(
+          DECIMAL_ADJUST
+        )}, val: ${this.corruption.value}}
+        Reputation: { prob: ${this.reputation.prob.toFixed(
+          DECIMAL_ADJUST
+        )}, val: ${this.reputation.value}}
+        Inflation: { prob: ${this.inflation.prob.toFixed(
+          DECIMAL_ADJUST
+        )}, val: ${this.inflation.value}}`,
       `magenta`
     );
   }
 
   runValuesEffect() {
-    this.insurgency.value < 40 ?
-      this.stability.value += 0.01 * this.reputation.value
-      :this.stability.value -= 0.02 * this.insurgency.value;
-    this.reputation.value -= 0.01 * (this.corruption.value+this.insurgency.value);
+    this.insurgency.value < 40
+      ? (this.stability.value += 0.01 * this.reputation.value)
+      : (this.stability.value -= 0.02 * this.insurgency.value);
+    this.reputation.value -=
+      0.01 * (this.corruption.value + this.insurgency.value);
     this.reputation.value += 0.02 * this.stability.value;
+  }
+
+  readjustValues() {
+    if (this.stability.prob < MINIMUM_ADJUSTABLE_PROB) {
+      this.stability.prob = getUniformRandom(0.01, 0.15);
+    }
+
+    if (this.insurgency.prob < MINIMUM_ADJUSTABLE_PROB) {
+      this.insurgency.prob = getUniformRandom(0.01, 0.15);
+    }
+
+    if (this.corruption.prob < MINIMUM_ADJUSTABLE_PROB) {
+      this.corruption.prob = getUniformRandom(0.01, 0.15);
+    }
+
+    if (this.inflation.prob < MINIMUM_ADJUSTABLE_PROB) {
+      this.inflation.prob = getUniformRandom(0.01, 0.15);
+    }
+
+    if (this.reputation.prob < MINIMUM_ADJUSTABLE_PROB) {
+      this.reputation.prob = getUniformRandom(0.01, 0.15);
+    }
   }
 
   evaluate() {
@@ -85,9 +122,11 @@ class Map {
 
     Helper.selfUpdateByProbs(this);
 
-    this.runValuesEffect();
+    // this.runValuesEffect();
 
     this.printValues();
+
+    this.readjustValues();
   }
 }
 

@@ -75,8 +75,6 @@ exports.selfUpdateByProbs = map => {
   mayUpgradeValuesByStability(map);
 
   mayUpgradeValuesByInsurgency(map);
-
-  // mayDowngradeReputation(map);
 };
 
 /**
@@ -108,7 +106,7 @@ const mayDowngradeReputation = map => {
 const mayUpgradeValuesByCorruption = map => {
   if (
     map.scheduler.currentTime % 4 === 0 &&
-    map.corruption.prob < 0.7 &&
+    map.corruption.prob < 0.85 &&
     Probs.getRandom() < map.corruption.prob
   ) {
     printMessage(
@@ -122,21 +120,21 @@ const mayUpgradeValuesByCorruption = map => {
       `      Inflation shall be upgraded by 1 due to corruption`,
       `danger`
     );
-    map.inflation.value += 1;
+    map.inflation.value += Probs.getNonUniformRandom(1, 3);
     map.inflation.prob += 0.035;
 
     printMessage(
       `      Stability shall be reduced by 1 due to corruption`,
       `danger`
     );
-    map.stability.value -= 1;
+    map.stability.value -= Probs.getUniformRandom(1, 3);
     map.stability.prob -= 0.0255;
 
     printMessage(
       `      Reputation shall be reduced by 1 due to corruption`,
       `danger`
     );
-    map.reputation.value -= 1;
+    map.reputation.value -= Probs.getUniformRandom(1, 4);
     map.reputation.prob -= 0.0255;
   }
 };
