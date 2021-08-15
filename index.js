@@ -1,36 +1,21 @@
-const { Scheduler } = require("./handlers/Scheduler.js");
-const { Map } = require("./classes/Map/class.js");
-const { Governor } = require("./classes/Governor/class.js");
-const { makeId } = require("./utils/strings.js");
-const { sleep } = require("./utils/time.js");
-const { getUniformRandom } = require("./utils/probabilities.js");
+import express from "express";
+import path from "path";
+import { simulate } from "./simulation.js";
+const app = express();
 
-const simulate = async () => {
-  const scheduler = new Scheduler();
-  const governor = new Governor(`Hugo Chavez`, `military`, scheduler);
-  const map = new Map(makeId(20), scheduler, governor);
+const server = app.listen(8088, function () {
+  const host = server.address().address;
+  const port = server.address().port;
 
-  while (map.stability.value < 100 || map.reputation.value > 0) {
-    map.evaluate();
+  console.log("Example app listening at http://%s:%s", host, port);
+});
 
-    console.log(`-------------------------------------------------------`);
+app.get("/", (request, response) => {
+  response.sendFile(path.resolve("./index.html"));
+});
 
-    scheduler.stepAhead();
+app.get("/simulation", async (request, response) => {
+  const simulation = await simulate();
 
-    await sleep(500);
-
-    if (map.stability.value > 100) {
-      console.log(` YOU HAVE WON THE GAME`);
-      break;
-    }
-
-    if (map.reputation.value < 0) {
-      console.log("YOU HAVE LOST THE GAME");
-      break;
-    }
-  }
-};
-
-simulate();
-
-// console.log(`Prob number`, getUniformRandom(0.01, 0.15));
+  response.send(simulation);
+});

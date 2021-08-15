@@ -1,6 +1,6 @@
-const { printMessage } = require("../../utils/strings");
+import { printMessage } from "../../utils/strings.js";
 
-class Operation {
+export class Operation {
   constructor(type) {
     this.type = type;
   }
@@ -22,5 +22,3 @@ class Operation {
     );
   }
 }
-
-exports.Operation = Operation;

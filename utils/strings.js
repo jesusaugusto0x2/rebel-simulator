@@ -1,6 +1,6 @@
-require("colors");
+import "colors";
 
-exports.makeId = (_length = 10) => {
+export const makeId = (_length = 10) => {
   var text = "";
   var possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -18,7 +18,7 @@ exports.makeId = (_length = 10) => {
  * @param {String} msg
  * @param {String} type
  */
-exports.printMessage = (msg, type = "") => {
+export const printMessage = (msg, type = "") => {
   switch (type) {
     case "success":
       console.log(`${msg}`.green);

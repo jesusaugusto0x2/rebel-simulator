@@ -1,92 +1,96 @@
-const Probs = require("../../utils/probabilities.js");
-const { printMessage } = require("../../utils/strings.js");
+import Probs from "../../utils/probabilities.js";
+import { printMessage } from "../../utils/strings.js";
 
-/**
- * It will evaluate the inverse probability values of stability
- * and corruption and sum both of them, in order to check if
- * there's any chance of executing a civilan operation depending
- * on future risks.
- *
- * @param {Map} map
- * @returns {Boolean}
- */
-exports.evaluateCivilianOp = map => {
-  const stabilityProb = map.stability.prob;
-  // const corruptionProb = map.corruption.prob;
+class GovernorHelper {
+  /**
+   * It will evaluate the inverse probability values of stability
+   * and corruption and sum both of them, in order to check if
+   * there's any chance of executing a civilan operation depending
+   * on future risks.
+   *
+   * @param {Map} map
+   * @returns {Boolean}
+   */
+  evaluateCivilianOp = map => {
+    const stabilityProb = map.stability.prob;
+    // const corruptionProb = map.corruption.prob;
 
-  printMessage(
-    `  Needed probabilities for civilan operation execution: `,
-    `advice`
-  );
+    printMessage(
+      `  Needed probabilities for civilan operation execution: `,
+      `advice`
+    );
 
-  printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
-  // printMessage(`  Corruption prob: ${corruptionProb}`, `warning`);
+    printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
+    // printMessage(`  Corruption prob: ${corruptionProb}`, `warning`);
 
-  // const commonProb = Probs.joinExcludentProbs(stabilityProb, corruptionProb);
+    // const commonProb = Probs.joinExcludentProbs(stabilityProb, corruptionProb);
 
-  printMessage(
-    `  Resulting prob: ${stabilityProb} chances of executing a Civilian Operation`,
-    `success`
-  );
+    printMessage(
+      `  Resulting prob: ${stabilityProb} chances of executing a Civilian Operation`,
+      `success`
+    );
 
-  return Probs.getRandom() > stabilityProb;
-};
+    return Probs.getRandom() > stabilityProb;
+  };
 
-/**
- * It will evaluate the current probabilities of corruption and
- * insurgency respectively and sum both of them, in order to check
- * if there's chance of executing a government operation.
- *
- * @param {Map} map
- * @returns {Boolean}
- */
-exports.evaluateGovernmentOp = map => {
-  const insurgencyProb = map.insurgency.prob;
-  const corruptionProb = map.corruption.prob;
+  /**
+   * It will evaluate the current probabilities of corruption and
+   * insurgency respectively and sum both of them, in order to check
+   * if there's chance of executing a government operation.
+   *
+   * @param {Map} map
+   * @returns {Boolean}
+   */
+  evaluateGovernmentOp = map => {
+    const insurgencyProb = map.insurgency.prob;
+    const corruptionProb = map.corruption.prob;
 
-  printMessage(
-    `  Needed probabilities for government operation execution: `,
-    `advice`
-  );
+    printMessage(
+      `  Needed probabilities for government operation execution: `,
+      `advice`
+    );
 
-  printMessage(`  Insurgency prob: ${insurgencyProb}`, `warning`);
-  printMessage(`  Corruption prob: ${corruptionProb}`, `warning`);
+    printMessage(`  Insurgency prob: ${insurgencyProb}`, `warning`);
+    printMessage(`  Corruption prob: ${corruptionProb}`, `warning`);
 
-  const commonProb = Probs.joinExcludentProbs(insurgencyProb, corruptionProb);
+    const commonProb = Probs.joinExcludentProbs(insurgencyProb, corruptionProb);
 
-  printMessage(
-    `  Resulting prob: ${commonProb}% chances of executing a Government Operation`,
-    `success`
-  );
+    printMessage(
+      `  Resulting prob: ${commonProb}% chances of executing a Government Operation`,
+      `success`
+    );
 
-  return Probs.getRandom() < commonProb;
-};
+    return Probs.getRandom() < commonProb;
+  };
 
-/**
- * It will evaluate the current probabilities of insurgency and
- * stability, in order to check if there's an actual need of executing a
- * militar operation.
- *
- * @param {Map} map
- */
-exports.evaluateMilitaryOp = map => {
-  const insurgencyProb = map.insurgency.prob;
-  // const stabilityProb = map.stability.prob;
+  /**
+   * It will evaluate the current probabilities of insurgency and
+   * stability, in order to check if there's an actual need of executing a
+   * militar operation.
+   *
+   * @param {Map} map
+   */
+  evaluateMilitaryOp = map => {
+    const insurgencyProb = map.insurgency.prob;
+    // const stabilityProb = map.stability.prob;
 
-  printMessage(
-    `  Needed probabilities for military operation execution: `,
-    `advice`
-  );
+    printMessage(
+      `  Needed probabilities for military operation execution: `,
+      `advice`
+    );
 
-  printMessage(`  Insurgency prob: ${insurgencyProb}`, `warning`);
-  // printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
+    printMessage(`  Insurgency prob: ${insurgencyProb}`, `warning`);
+    // printMessage(`  Stability prob: ${stabilityProb}`, `warning`);
 
-  // const commonProb = Probs.joinExcludentProbs(stabilityProb, insurgencyProb);
+    // const commonProb = Probs.joinExcludentProbs(stabilityProb, insurgencyProb);
 
-  printMessage(
-    `  Resulting prob: ${insurgencyProb}% chances of executing a Government Operation`,
-    `success`
-  );
+    printMessage(
+      `  Resulting prob: ${insurgencyProb}% chances of executing a Government Operation`,
+      `success`
+    );
 
-  return Probs.getRandom() < insurgencyProb;
-};
+    return Probs.getRandom() < insurgencyProb;
+  };
+}
+
+export default new GovernorHelper();

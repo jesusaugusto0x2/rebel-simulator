@@ -1,10 +1,8 @@
-const { Operation } = require("../class.js");
-
-const Prob = require("../../../utils/probabilities.js");
-const { printMessage } = require("../../../utils/strings.js");
-const {
-  buildProbabilitySet,
-  getBudgetProbs,
+import { Operation } from "../class.js";
+import { printMessage } from "../../../utils/strings.js";
+import Prob from "../../../utils/probabilities.js";
+import Helper from "../helpers.js";
+import {
   LOW_PROB,
   MED_LOW_PROB,
   MED_PROB,
@@ -16,11 +14,11 @@ const {
   LOW_TIME,
   MED_TIME,
   HIGH_TIME,
-} = require("../helpers.js");
+} from "../helpers.js";
 
 const TYPE = "government";
 
-class GovernmentOp extends Operation {
+export class GovernmentOperation extends Operation {
   constructor() {
     super(TYPE);
   }
@@ -31,7 +29,7 @@ class GovernmentOp extends Operation {
       `warning`
     );
 
-    const { firstProb, secondProb, thirdProb } = getBudgetProbs(map);
+    const { firstProb, secondProb, thirdProb } = Helper.getBudgetProbs(map);
 
     const executionProb = Prob.getRandom();
 
@@ -47,7 +45,7 @@ class GovernmentOp extends Operation {
   outreachOperation(map, scheduler) {
     printMessage(`    GOB OPERATION: Outreach`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = Helper.buildProbabilitySet({
       corruptionVal: -LOW_PROB,
       stabilityVal: LOW_PROB,
       insurgencyVal: LOW_PROB,
@@ -68,7 +66,7 @@ class GovernmentOp extends Operation {
   antiCorruptiveOperation(map, scheduler) {
     printMessage(`    GOB OPERATION: Anti-corruptive`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = Helper.buildProbabilitySet({
       corruptionVal: -MED_PROB,
       stabilityVal: MED_PROB,
       insurgencyVal: MED_PROB,
@@ -89,7 +87,7 @@ class GovernmentOp extends Operation {
   democraticOperation(map, scheduler) {
     printMessage(`    GOB OPERATION: Democratic`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = Helper.buildProbabilitySet({
       corruptionVal: -HIGH_PROB,
       stabilityVal: HIGH_PROB,
       insurgencyVal: HIGH_PROB,
@@ -107,5 +105,3 @@ class GovernmentOp extends Operation {
     );
   }
 }
-
-exports.GovernmentOperation = GovernmentOp;

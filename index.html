@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sim</title>
+  </head>
+  <body>
+    <h1>Hola</h1>
+
+    <button id="sim-btn">Simulate</button>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"
+      integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script type="text/javascript">
+      let simulation;
+      const simBtn = document.getElementById("sim-btn");
+
+      simBtn.onclick = async () => {
+        console.log("Clicked!");
+
+        const response = await fetch("http://localhost:8088/simulation");
+
+        const jsonResp = await response.json();
+
+        console.log("Given response", jsonResp);
+
+        const { scheduler } = jsonResp;
+
+        const xValues = [...Array(scheduler.currentTime).keys()];
+
+        console.log("xValues", xValues);
+      };
+    </script>
+  </body>
+</html>

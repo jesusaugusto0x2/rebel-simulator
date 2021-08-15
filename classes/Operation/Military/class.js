@@ -1,10 +1,8 @@
-const { Operation } = require("../class.js");
-
-const Prob = require("../../../utils/probabilities.js");
-const { printMessage } = require("../../../utils/strings.js");
-const {
-  buildProbabilitySet,
-  getBudgetProbs,
+import { Operation } from "../class.js";
+import { printMessage } from "../../../utils/strings.js";
+import Prob from "../../../utils/probabilities.js";
+import Helper from "../helpers.js";
+import {
   LOW_PROB,
   MED_LOW_PROB,
   MED_PROB,
@@ -16,11 +14,11 @@ const {
   LOW_TIME,
   MED_TIME,
   HIGH_TIME,
-} = require("../helpers.js");
+} from "../helpers.js";
 
 const TYPE = "government";
 
-class MilitaryOp extends Operation {
+export class MilitaryOperation extends Operation {
   constructor() {
     super(TYPE);
   }
@@ -31,7 +29,7 @@ class MilitaryOp extends Operation {
       `warning`
     );
 
-    const { firstProb, secondProb, thirdProb } = getBudgetProbs(map);
+    const { firstProb, secondProb, thirdProb } = Helper.getBudgetProbs(map);
 
     const executionProb = Prob.getRandom();
 
@@ -47,7 +45,7 @@ class MilitaryOp extends Operation {
   createSoldierOperation(map, scheduler) {
     printMessage(`    MIL OPERATION: Soldier Creation`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = Helper.buildProbabilitySet({
       corruptionVal: LOW_PROB,
       stabilityVal: -LOW_PROB,
       insurgencyVal: -LOW_PROB,
@@ -68,7 +66,7 @@ class MilitaryOp extends Operation {
   civilSupportOperation(map, scheduler) {
     printMessage(`    MIL OPERATION: Civil Support`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = Helper.buildProbabilitySet({
       corruptionVal: MED_PROB,
       stabilityVal: -MED_PROB,
       insurgencyVal: -MED_PROB,
@@ -89,7 +87,7 @@ class MilitaryOp extends Operation {
   strikeOperation(map, scheduler) {
     printMessage(`    MIL OPERATION: Strike`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = Helper.buildProbabilitySet({
       corruptionVal: HIGH_PROB,
       stabilityVal: -HIGH_PROB,
       insurgencyVal: -HIGH_PROB,
@@ -108,4 +106,4 @@ class MilitaryOp extends Operation {
   }
 }
 
-exports.MilitaryOperation = MilitaryOp;
+// exports.MilitaryOperation = MilitaryOp;

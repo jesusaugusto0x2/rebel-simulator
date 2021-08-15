@@ -1,12 +1,12 @@
-const PD = require("probability-distributions");
-const { getUniformRandom } = require("../../utils/probabilities.js");
-const { printMessage } = require("../../utils/strings.js");
-const Helper = require("./helpers.js");
+import PD from "probability-distributions";
+import Probs from "../../utils/probabilities.js";
+import { printMessage } from "../../utils/strings.js";
+import Helper from "./helpers.js";
 
 const DECIMAL_ADJUST = 2;
 const MINIMUM_ADJUSTABLE_PROB = 0.02;
 
-class Map {
+export default class Map {
   constructor(name, scheduler, governor) {
     this.name = name;
     this.scheduler = scheduler;
@@ -86,23 +86,23 @@ class Map {
 
   readjustValues() {
     if (this.stability.prob < MINIMUM_ADJUSTABLE_PROB) {
-      this.stability.prob = getUniformRandom(0.01, 0.15);
+      this.stability.prob = Probs.getUniformRandom(0.01, 0.15);
     }
 
     if (this.insurgency.prob < MINIMUM_ADJUSTABLE_PROB) {
-      this.insurgency.prob = getUniformRandom(0.01, 0.15);
+      this.insurgency.prob = Probs.getUniformRandom(0.01, 0.15);
     }
 
     if (this.corruption.prob < MINIMUM_ADJUSTABLE_PROB) {
-      this.corruption.prob = getUniformRandom(0.01, 0.15);
+      this.corruption.prob = Probs.getUniformRandom(0.01, 0.15);
     }
 
     if (this.inflation.prob < MINIMUM_ADJUSTABLE_PROB) {
-      this.inflation.prob = getUniformRandom(0.01, 0.15);
+      this.inflation.prob = Probs.getUniformRandom(0.01, 0.15);
     }
 
     if (this.reputation.prob < MINIMUM_ADJUSTABLE_PROB) {
-      this.reputation.prob = getUniformRandom(0.01, 0.15);
+      this.reputation.prob = Probs.getUniformRandom(0.01, 0.15);
     }
   }
 
@@ -129,5 +129,3 @@ class Map {
     this.readjustValues();
   }
 }
-
-exports.Map = Map;

@@ -1,10 +1,10 @@
-const { printMessage } = require("../../utils/strings.js");
-const { CivilianOperation } = require("../Operation/Civilian/class.js");
-const { GovernmentOperation } = require("../Operation/Government/class.js");
-const { MilitaryOperation } = require("../Operation/Military/class.js");
-const Helper = require("./helpers.js");
+import { printMessage } from "../../utils/strings.js";
+import { CivilianOperation } from "../Operation/Civilian/class.js";
+import { GovernmentOperation } from "../Operation/Government/class.js";
+import { MilitaryOperation } from "../Operation/Military/class.js";
+import GovHelper from "./helpers.js";
 
-class Governor {
+export default class Governor {
   constructor(name, type, scheduler) {
     this.name = name;
     this.type = type;
@@ -23,24 +23,22 @@ class Governor {
   executeOperation(map) {
     printMessage(`Governor ${this.name} starts executing operations`, `advice`);
 
-    if (Helper.evaluateCivilianOp(map) === true) {
+    if (GovHelper.evaluateCivilianOp(map) === true) {
       printMessage(`    Civilian operation will be executed`, `advice`);
 
       this.civOp.execute(map, this.scheduler);
     }
 
-    if (Helper.evaluateGovernmentOp(map) === true) {
+    if (GovHelper.evaluateGovernmentOp(map) === true) {
       printMessage(`    Government operation will be executed`, `advice`);
 
       this.govOp.execute(map, this.scheduler);
     }
 
-    if (Helper.evaluateMilitaryOp(map) === true) {
+    if (GovHelper.evaluateMilitaryOp(map) === true) {
       printMessage(`    Military operation will be executed`, `advice`);
 
       this.govOp.execute(map, this.scheduler);
     }
   }
 }
-
-exports.Governor = Governor;

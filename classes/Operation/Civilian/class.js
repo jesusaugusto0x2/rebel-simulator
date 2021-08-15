@@ -1,10 +1,8 @@
-const { Operation } = require("../class.js");
-
-const Prob = require("../../../utils/probabilities.js");
-const { printMessage } = require("../../../utils/strings.js");
-const {
-  buildProbabilitySet,
-  getBudgetProbs,
+import { Operation } from "../class.js";
+import { printMessage } from "../../../utils/strings.js";
+import Prob from "../../../utils/probabilities.js";
+import OperationHelper from "../helpers.js";
+import {
   LOW_PROB,
   MED_LOW_PROB,
   MED_PROB,
@@ -16,11 +14,11 @@ const {
   LOW_TIME,
   MED_TIME,
   HIGH_TIME,
-} = require("../helpers.js");
+} from "../helpers.js";
 
 const TYPE = "civilian";
 
-class CivilianOp extends Operation {
+export class CivilianOperation extends Operation {
   constructor() {
     super(TYPE);
   }
@@ -31,7 +29,8 @@ class CivilianOp extends Operation {
       `warning`
     );
 
-    const { firstProb, secondProb, thirdProb } = getBudgetProbs(map);
+    const { firstProb, secondProb, thirdProb } =
+      OperationHelper.getBudgetProbs(map);
 
     const executionProb = Prob.getRandom();
 
@@ -47,7 +46,7 @@ class CivilianOp extends Operation {
   serviceOperation(map, scheduler) {
     printMessage(`    CIV OPERATION: Service`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = OperationHelper.buildProbabilitySet({
       corruptionVal: LOW_PROB,
       stabilityVal: LOW_PROB,
       insurgencyVal: -LOW_PROB,
@@ -68,7 +67,7 @@ class CivilianOp extends Operation {
   developmentOperation(map, scheduler) {
     printMessage(`    CIV OPERATION: Development`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = OperationHelper.buildProbabilitySet({
       corruptionVal: MED_PROB,
       stabilityVal: MED_PROB,
       insurgencyVal: -MED_PROB,
@@ -89,7 +88,7 @@ class CivilianOp extends Operation {
   infrastructureOperation(map, scheduler) {
     printMessage(`    CIV OPERATION: Infrastructure`, `warning`);
 
-    const probs = buildProbabilitySet({
+    const probs = OperationHelper.buildProbabilitySet({
       corruptionVal: HIGH_PROB,
       stabilityVal: HIGH_PROB,
       insurgencyVal: -HIGH_PROB,
@@ -107,5 +106,3 @@ class CivilianOp extends Operation {
     );
   }
 }
-
-exports.CivilianOperation = CivilianOp;

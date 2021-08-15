@@ -1,4 +1,4 @@
-class Scheduler {
+export default class Scheduler {
   constructor() {
     this.events = [];
     this.currentTime = 0;
@@ -61,5 +61,3 @@ class Scheduler {
     return this.currentTime;
   }
 }
-
-exports.Scheduler = Scheduler;
