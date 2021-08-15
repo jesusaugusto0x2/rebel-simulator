@@ -9,6 +9,8 @@
   <body>
     <h1>Hola</h1>
 
+    <canvas id="global-charting" style="width: 750px"></canvas>
+
     <button id="sim-btn">Simulate</button>
 
     <script
@@ -19,7 +21,6 @@
     ></script>
 
     <script type="text/javascript">
-      let simulation;
       const simBtn = document.getElementById("sim-btn");
 
       simBtn.onclick = async () => {
@@ -31,11 +32,51 @@
 
         console.log("Given response", jsonResp);
 
-        const { scheduler } = jsonResp;
+        const { scheduler, historic } = jsonResp;
+
+        console.log("historic", historic);
 
         const xValues = [...Array(scheduler.currentTime).keys()];
 
         console.log("xValues", xValues);
+
+        // const stabilityValues = historic.stability.map(stab => {
+        //   return stab.value;
+        // });
+
+        const stabilityValues = extractValues(historic, "stability");
+
+        const corruptionValues = extractValues(historic, "corruption");
+
+        console.log("corruptionValues", corruptionValues);
+
+        new Chart("global-charting", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [
+              {
+                data: stabilityValues,
+                borderColor: "green",
+                fill: false,
+              },
+              {
+                data: corruptionValues,
+                borderColor: "red",
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            legend: { display: false },
+          },
+        });
+      };
+
+      const extractValues = (_historic, _itemType) => {
+        return _historic[_itemType].map(probItem => {
+          return probItem.value;
+        });
       };
     </script>
   </body>

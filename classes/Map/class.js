@@ -47,6 +47,14 @@ export default class Map {
       prob: 0.01,
       value: 5,
     };
+
+    this.historic = {
+      stability: [],
+      inflation: [],
+      insurgency: [],
+      reputation: [],
+      corruption: [],
+    };
   }
 
   reduceBudget(value) {
@@ -106,6 +114,45 @@ export default class Map {
     }
   }
 
+  saveHistoricValues() {
+    const currTime = this.scheduler.getCurrentTime();
+
+    // Save historic stability values
+    this.historic.stability.push({
+      prob: this.stability.prob,
+      value: this.stability.value,
+      time: currTime,
+    });
+
+    // Save historic inflation values
+    this.historic.inflation.push({
+      prob: this.inflation.prob,
+      value: this.inflation.value,
+      time: currTime,
+    });
+
+    // Save historic insurgency values
+    this.historic.insurgency.push({
+      prob: this.insurgency.prob,
+      value: this.insurgency.value,
+      time: currTime,
+    });
+
+    // Save historic reputation values
+    this.historic.reputation.push({
+      prob: this.reputation.prob,
+      value: this.reputation.value,
+      time: currTime,
+    });
+
+    // Save historic corruption values
+    this.historic.corruption.push({
+      prob: this.corruption.prob,
+      value: this.corruption.value,
+      time: currTime,
+    });
+  }
+
   evaluate() {
     printMessage(
       `Evaluating map state on ${this.scheduler.getCurrentTime()} week`,
@@ -127,5 +174,7 @@ export default class Map {
     this.printValues();
 
     this.readjustValues();
+
+    this.saveHistoricValues();
   }
 }
