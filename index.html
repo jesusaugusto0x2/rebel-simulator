@@ -7,7 +7,7 @@
     <title>Sim</title>
   </head>
   <body>
-    <h1>Hola</h1>
+    <h1>Rebel INC Simulator</h1>
 
     <canvas id="global-charting" style="width: 750px"></canvas>
 
@@ -44,6 +44,12 @@
         //   return stab.value;
         // });
 
+        const inflationValues = extractValues(historic, "inflation");
+
+        const insurgencyValues = extractValues(historic, "insurgency");
+
+        const reputationValues = extractValues(historic, "reputation");
+
         const stabilityValues = extractValues(historic, "stability");
 
         const corruptionValues = extractValues(historic, "corruption");
@@ -56,13 +62,33 @@
             labels: xValues,
             datasets: [
               {
+                label: "Inflation",
+                data: inflationValues,
+                borderColor: "yellow",
+                fill: false,
+              },
+              {
+                label: "Reputation",
+                data: reputationValues,
+                borderColor: "blue",
+                fill: false,
+              },
+              {
+                label: "Stability",
                 data: stabilityValues,
                 borderColor: "green",
                 fill: false,
               },
               {
-                data: corruptionValues,
+                label: "Insurgency",
+                data: insurgencyValues,
                 borderColor: "red",
+                fill: false,
+              },
+              {
+                label: "Corruption",
+                data: corruptionValues,
+                borderColor: "orange",
                 fill: false,
               },
             ],

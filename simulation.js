@@ -18,12 +18,12 @@ export const simulate = async () => {
 
     // await sleep(500);
 
-    if (map.stability.value > 100) {
+    if (map.stability.value >= 100) {
       console.log(` YOU HAVE WON THE GAME`);
       break;
     }
 
-    if (map.reputation.value < 0) {
+    if (map.reputation.value <= 0) {
       console.log("YOU HAVE LOST THE GAME");
       break;
     }
