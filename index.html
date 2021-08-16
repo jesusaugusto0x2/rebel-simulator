@@ -4,14 +4,55 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sim</title>
+    <title>Simulation</title>
+    <style>
+      body{
+        background-color: #1d1d1d;
+        padding: 0 20px;
+        margin: 0;
+      }
+      .canva {
+        width: 1000px !important;
+        height: 500px !important;
+        margin: 0 auto;
+      }
+      .row {
+        display: flex;
+      }
+      .header{
+        width: 100%;
+        justify-content: space-between;
+        color: white;
+      }
+      .button{
+        all: unset;
+        border: 1px solid transparent;
+        padding: 10px 40px;
+        height: fit-content;
+        margin: auto 0;
+        border-radius: 15px;
+        font-weight: bold;
+        background-color: #007300;
+        color: white;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: 0.4s;
+      }
+      .button:hover {
+        background-color: #08c308;
+        transition: 0.4s;
+      }
+    </style>
   </head>
   <body>
-    <h1>Rebel INC Simulator</h1>
+    <div class="row header">
+      <h1>Rebel INC Simulator</h1>
+      <button class="button" id="sim-btn">RUN</button>
+      <div style = "width: 290px"></div>
+    </div>
 
-    <canvas id="global-charting" style="width: 750px"></canvas>
-
-    <button id="sim-btn">Simulate</button>
+    <canvas id="line-charting" class="canva"></canvas>
+    
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"
@@ -22,6 +63,22 @@
 
     <script type="text/javascript">
       const simBtn = document.getElementById("sim-btn");
+
+      
+      let line = new Chart("line-charting", {
+          type: "line",
+          data: {
+            labels: [0,10,20,30,40,50],
+            datasets: [
+                {
+                    data: [0, 0, 0, 0, 0]
+                }
+            ]
+          },
+          options: {
+            legend: { display: false },
+          },
+        });
 
       simBtn.onclick = async () => {
         console.log("Clicked!");
@@ -55,48 +112,43 @@
         const corruptionValues = extractValues(historic, "corruption");
 
         console.log("corruptionValues", corruptionValues);
+        line.data = {
+          labels: xValues,
+          datasets: [
+            {
+              label: "Inflation",
+              data: inflationValues,
+              borderColor: "yellow",
+              fill: false,
+            },
+            {
+              label: "Reputation",
+              data: reputationValues,
+              borderColor: "blue",
+              fill: false,
+            },
+            {
+              label: "Stability",
+              data: stabilityValues,
+              borderColor: "green",
+              fill: false,
+            },
+            {
+              label: "Insurgency",
+              data: insurgencyValues,
+              borderColor: "red",
+              fill: false,
+            },
+            {
+              label: "Corruption",
+              data: corruptionValues,
+              borderColor: "orange",
+              fill: false,
+            },
+          ],
+        };
 
-        new Chart("global-charting", {
-          type: "line",
-          data: {
-            labels: xValues,
-            datasets: [
-              {
-                label: "Inflation",
-                data: inflationValues,
-                borderColor: "yellow",
-                fill: false,
-              },
-              {
-                label: "Reputation",
-                data: reputationValues,
-                borderColor: "blue",
-                fill: false,
-              },
-              {
-                label: "Stability",
-                data: stabilityValues,
-                borderColor: "green",
-                fill: false,
-              },
-              {
-                label: "Insurgency",
-                data: insurgencyValues,
-                borderColor: "red",
-                fill: false,
-              },
-              {
-                label: "Corruption",
-                data: corruptionValues,
-                borderColor: "orange",
-                fill: false,
-              },
-            ],
-          },
-          options: {
-            legend: { display: false },
-          },
-        });
+        line.update();
       };
 
       const extractValues = (_historic, _itemType) => {
