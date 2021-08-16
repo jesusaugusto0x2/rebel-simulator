@@ -1,5 +1,9 @@
 import Probs from "../../utils/probabilities.js";
 import { printMessage } from "../../utils/strings.js";
+import {
+  LOW_PROB,
+  MED_LOW_PROB,
+} from "../Operation/helpers.js";
 class MapHelper {
   constructor() {}
 
@@ -47,22 +51,33 @@ class MapHelper {
   checkSelfProbabilities = map => {
     if (Probs.getRandom() < map.corruption.prob) {
       map.corruption.value += 1;
+      map.insurgency.prob += LOW_PROB;
     }
 
     if (Probs.getRandom() < map.inflation.prob) {
       map.inflation.value += 1;
+      map.insurgency.prob += LOW_PROB;
     }
 
     if (Probs.getRandom() < map.reputation.prob) {
       map.reputation.value += 1;
+      map.insurgency.prob -= MED_LOW_PROB;
+      map.stability.prob += LOW_PROB;
     }
 
     if (Probs.getRandom() < map.stability.prob) {
       map.stability.value += 1;
+      map.reputation.value += 1;
+      map.insurgency.value -= 1;
+      map.insurgency.prob -= MED_LOW_PROB;
     }
 
     if (Probs.getRandom() < map.insurgency.prob) {
       map.insurgency.value += 1;
+      map.stability.value -= 1;
+      map.reputation.value -= 1;
+      map.stability.prob -= MED_LOW_PROB;
+      map.reputation.prob -= MED_LOW_PROB;
     }
   };
 
