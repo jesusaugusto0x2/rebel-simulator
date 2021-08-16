@@ -1,10 +1,5 @@
 import Probs from "../../utils/probabilities.js";
 import { printMessage } from "../../utils/strings.js";
-import { sleep } from "../../utils/time.js";
-import {
-  LOW_PROB,
-  MED_LOW_PROB,
-} from "../Operation/helpers.js";
 class MapHelper {
   constructor() {}
 
@@ -68,27 +63,22 @@ class MapHelper {
    */
   checkSelfProbabilities = map => {
     if (Probs.getRandom() < map.corruption.prob) {
-      console.log('-------corruption--------');
       map.corruption.value = this.sumValue(map.corruption.value, 1);
     }
 
     if (Probs.getRandom() < map.inflation.prob) {
-      console.log('-------inflation--------');
       map.inflation.value = this.sumValue(map.inflation.value, 1);
     }
 
     if (Probs.getRandom() < map.reputation.prob) {
-      console.log('-------reputation--------');
       map.reputation.value = this.sumValue(map.reputation.value, 1);
     }
 
     if (Probs.getRandom() < map.stability.prob) {
-      console.log('-------stability--------');
       map.stability.value = this.sumValue(map.stability.value, 1);
     }
 
     if (Probs.getRandom() < map.insurgency.prob) {
-      console.log('-------insurgency--------');
       map.insurgency.value = this.sumValue(map.insurgency.value, 1);
     }
   };
@@ -114,8 +104,7 @@ class MapHelper {
    */
   mayUpgradeValuesByCorruption = map => {
     if (
-      map.scheduler.currentTime % 4 === 0 &&
-      map.corruption.prob < 0.85 &&
+      map.scheduler.currentTime % 3 === 0 &&
       Probs.getRandom() < map.corruption.prob
     ) {
       printMessage(
@@ -123,37 +112,27 @@ class MapHelper {
         `danger`
       );
       map.insurgency.value = this.sumValue(map.insurgency.value, 1);
-      map.insurgency.prob = this.sumProb(map.insurgency.prob, 0.0455);
+      map.insurgency.prob = this.sumProb(map.insurgency.prob, 0.0555);
 
       printMessage(
         `      Inflation shall be upgraded by 1 due to corruption`,
         `danger`
       );
-      map.inflation.value = this.sumValue(
-        map.inflation.value, 
-        Probs.getNonUniformRandom(1, 3)
-        );
+      map.inflation.value = this.sumValue(map.inflation.value, 1);
       map.inflation.prob = this.sumProb(map.inflation.prob, 0.035);
 
       printMessage(
         `      Stability shall be reduced by 1 due to corruption`,
         `danger`
       );
-      map.stability.value = this.sumValue(
-        map.stability.value, 
-        Probs.getNonUniformRandom(1, 3)
-        );
+      map.stability.value = this.sumValue(map.stability.value, -1);
       map.stability.prob = this.sumProb(map.stability.prob, -0.0255);
 
       printMessage(
         `      Reputation shall be reduced by 1 due to corruption`,
         `danger`
       );
-      map.reputation.value = this.sumValue(
-        map.reputation.value, 
-        Probs.getNonUniformRandom(1, 4)
-        );
-      map.reputation.value -= Probs.getUniformRandom(1, 4);
+      map.reputation.value = this.sumValue(map.reputation.value, -1);
       map.reputation.prob = this.sumProb(map.reputation.prob, -0.0255);
     }
   };
@@ -166,9 +145,6 @@ class MapHelper {
   mayUpgradeValuesByStability = map => {
     if (
       map.scheduler.currentTime % 2 === 0 &&
-      map.stability.prob < 0.8 &&
-      map.corruption.prob > 0.1 &&
-      map.insurgency.prob > 0.05 &&
       Probs.getRandom() < map.stability.prob
     ) {
       printMessage(
@@ -184,6 +160,13 @@ class MapHelper {
       );
       map.insurgency.value = this.sumValue(map.insurgency.value, -1);
       map.insurgency.prob = this.sumProb(map.insurgency.prob, -0.025);
+
+      printMessage(
+        `      Inflation shall be reduced by 1 due to stability`,
+        `success`
+      );
+      map.inflation.value = this.sumValue(map.inflation.value, -1);
+      map.inflation.prob = this.sumProb(map.insurgency.prob, -0.025);
     }
   };
 
@@ -202,7 +185,19 @@ class MapHelper {
         `danger`
       );
       map.corruption.value = this.sumValue(map.corruption.value, 1);
-      map.corruption.prob = this.sumProb(map.corruption.prob, 0.08125);
+      map.corruption.prob = this.sumProb(map.corruption.prob, 0.04125);
+      printMessage(
+        `      Stability shall be reduced by 1 due to insurgency`,
+        `danger`
+      );
+      map.stability.value = this.sumValue(map.stability.value, -1);
+      map.stability.prob = this.sumProb(map.stability.prob, -0.0555);
+      printMessage(
+        `      Reputation shall be reduced by 1 due to insurgency`,
+        `danger`
+      );
+      map.reputation.value = this.sumValue(map.reputation.value, -1);
+      map.reputation.prob = this.sumProb(map.reputation.prob, -0.0555);
     }
   };
 }
