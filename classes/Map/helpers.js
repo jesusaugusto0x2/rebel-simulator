@@ -112,28 +112,28 @@ class MapHelper {
         `danger`
       );
       map.insurgency.value = this.sumValue(map.insurgency.value, 1);
-      map.insurgency.prob = this.sumProb(map.insurgency.prob, 0.0555);
+      map.insurgency.prob = this.sumProb(map.insurgency.prob, 0.033);
 
       printMessage(
         `      Inflation shall be upgraded by 1 due to corruption`,
         `danger`
       );
       map.inflation.value = this.sumValue(map.inflation.value, 1);
-      map.inflation.prob = this.sumProb(map.inflation.prob, 0.035);
+      map.inflation.prob = this.sumProb(map.inflation.prob, 0.033);
 
       printMessage(
         `      Stability shall be reduced by 1 due to corruption`,
         `danger`
       );
       map.stability.value = this.sumValue(map.stability.value, -1);
-      map.stability.prob = this.sumProb(map.stability.prob, -0.0255);
+      map.stability.prob = this.sumProb(map.stability.prob, -0.03);
 
       printMessage(
         `      Reputation shall be reduced by 1 due to corruption`,
         `danger`
       );
       map.reputation.value = this.sumValue(map.reputation.value, -1);
-      map.reputation.prob = this.sumProb(map.reputation.prob, -0.0255);
+      map.reputation.prob = this.sumProb(map.reputation.prob, -0.03);
     }
   };
 
@@ -152,21 +152,21 @@ class MapHelper {
         `success`
       );
       map.corruption.value = this.sumValue(map.corruption.value, -1);
-      map.corruption.prob = this.sumProb(map.corruption.prob, -0.0399);
+      map.corruption.prob = this.sumProb(map.corruption.prob, -0.03);
 
       printMessage(
         `      Insurgency shall be reduced by 1 due to stability`,
         `success`
       );
       map.insurgency.value = this.sumValue(map.insurgency.value, -1);
-      map.insurgency.prob = this.sumProb(map.insurgency.prob, -0.025);
+      map.insurgency.prob = this.sumProb(map.insurgency.prob, -0.03);
 
       printMessage(
         `      Inflation shall be reduced by 1 due to stability`,
         `success`
       );
       map.inflation.value = this.sumValue(map.inflation.value, -1);
-      map.inflation.prob = this.sumProb(map.insurgency.prob, -0.025);
+      map.inflation.prob = this.sumProb(map.insurgency.prob, -0.03);
     }
   };
 
@@ -185,19 +185,19 @@ class MapHelper {
         `danger`
       );
       map.corruption.value = this.sumValue(map.corruption.value, 1);
-      map.corruption.prob = this.sumProb(map.corruption.prob, 0.04125);
+      map.corruption.prob = this.sumProb(map.corruption.prob, 0.04);
       printMessage(
         `      Stability shall be reduced by 1 due to insurgency`,
         `danger`
       );
       map.stability.value = this.sumValue(map.stability.value, -1);
-      map.stability.prob = this.sumProb(map.stability.prob, -0.0555);
+      map.stability.prob = this.sumProb(map.stability.prob, -0.05);
       printMessage(
         `      Reputation shall be reduced by 1 due to insurgency`,
         `danger`
       );
-      map.reputation.value = this.sumValue(map.reputation.value, -1);
-      map.reputation.prob = this.sumProb(map.reputation.prob, -0.0555);
+      map.reputation.value = this.sumValue(map.reputation.value, -2);
+      map.reputation.prob = this.sumProb(map.reputation.prob, -0.05);
     }
   };
 }
