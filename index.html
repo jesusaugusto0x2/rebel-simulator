@@ -5,26 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simulation</title>
-    <style>
-      body{
+
+    <style type="text/css">
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+      body {
         background-color: #1d1d1d;
         padding: 0 20px;
         margin: 0;
+        font-family: "Open Sans", sans-serif;
       }
+
       .canva {
-        width: 1000px !important;
-        height: 500px !important;
+        width: 1090px !important;
+        height: 600px !important;
         margin: 0 auto;
       }
+
       .row {
         display: flex;
       }
-      .header{
+
+      .header {
         width: 100%;
         justify-content: space-between;
         color: white;
       }
-      .button{
+
+      .button {
         all: unset;
         border: 1px solid transparent;
         padding: 10px 40px;
@@ -38,6 +46,7 @@
         text-transform: uppercase;
         transition: 0.4s;
       }
+
       .button:hover {
         background-color: #08c308;
         transition: 0.4s;
@@ -48,11 +57,10 @@
     <div class="row header">
       <h1>Rebel INC Simulator</h1>
       <button class="button" id="sim-btn">RUN</button>
-      <div style = "width: 290px"></div>
+      <div style="width: 290px"></div>
     </div>
 
     <canvas id="line-charting" class="canva"></canvas>
-    
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"
@@ -62,53 +70,36 @@
     ></script>
 
     <script type="text/javascript">
+      let line = new Chart("line-charting", {
+        type: "line",
+        data: {
+          labels: [0, 10, 20, 30, 40, 50],
+          datasets: [
+            {
+              data: [0, 0, 0, 0, 0],
+            },
+          ],
+        },
+        options: {
+          legend: { display: false },
+        },
+      });
+
       const simBtn = document.getElementById("sim-btn");
 
-      
-      let line = new Chart("line-charting", {
-          type: "line",
-          data: {
-            labels: [0,10,20,30,40,50],
-            datasets: [
-                {
-                    data: [0, 0, 0, 0, 0]
-                }
-            ]
-          },
-          options: {
-            legend: { display: false },
-          },
-        });
-
       simBtn.onclick = async () => {
-        console.log("Clicked!");
-
         const response = await fetch("http://localhost:8088/simulation");
 
         const jsonResp = await response.json();
 
-        console.log("Given response", jsonResp);
-
         const { scheduler, historic } = jsonResp;
-
-        console.log("historic", historic);
 
         const xValues = [...Array(scheduler.currentTime).keys()];
 
-        console.log("xValues", xValues);
-
-        // const stabilityValues = historic.stability.map(stab => {
-        //   return stab.value;
-        // });
-
         const inflationValues = extractValues(historic, "inflation");
-
         const insurgencyValues = extractValues(historic, "insurgency");
-
         const reputationValues = extractValues(historic, "reputation");
-
         const stabilityValues = extractValues(historic, "stability");
-
         const corruptionValues = extractValues(historic, "corruption");
 
         console.log("corruptionValues", corruptionValues);
